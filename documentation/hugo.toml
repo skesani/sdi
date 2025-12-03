@@ -1,73 +1,67 @@
 baseURL = 'http://localhost:1313/'
 languageCode = 'en-us'
-title = 'SDI API Documentation'
-theme = 'docuapi'
+title = 'SDI - Synthetic Digital Immunity'
+theme = 'book'
 
-disableKinds = ["taxonomy"]
+[params]
+  # Book theme configuration
+  BookTheme = "auto"  # auto, dark, light
+  BookMenuBundle = "/menu"
+  
+  # Enable features
+  BookSearch = true
+  BookComments = false
+  BookToC = true
+  BookSectionNav = true
+  
+  # Branding
+  BookLogo = "/images/logo.png"
+  BookRepo = "https://github.com/skesani/sdi"
+  
+  # Code highlighting
+  BookDateFormat = "January 2, 2006"
+  BookPostDate = false
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.parser]
-      autoHeadingIDType = "github-ascii"
-    [markup.goldmark.renderer]
-      unsafe = true
   [markup.highlight]
     style = "github"
     codeFences = true
     lineNos = true
+    noClasses = false
 
-[module]
-  [module.hugoVersion]
-    min = "0.116.0"
-  [[module.imports]]
-    path = "github.com/bep/docuapi/v2"
-  [[module.imports]]
-    path = "github.com/gohugoio/hugo-mod-jslibs-dist/alpinejs/v3"
-  [[module.imports]]
-    path = "github.com/olivernn/lunr.js"
-    [[module.imports.mounts]]
-      source = "lunr.js"
-      target = "assets/js/lib/lunr.js"
-  [[module.imports]]
-    path = "github.com/slatedocs/slate"
-    [[module.imports.mounts]]
-      source = "source/images"
-      target = "static/images"
-    [[module.imports.mounts]]
-      source = "source/fonts"
-      target = "static/fonts"
-    [[module.imports.mounts]]
-      source = "source/stylesheets"
-      target = "assets/scss/slate"
-
-[params]
-  description = "Synthetic Digital Immunity API Documentation"
-  search = true
-  maxMenuDepth = 3
+[menu]
+  [[menu.main]]
+    identifier = "getting-started"
+    name = "Getting Started"
+    url = "/getting-started/"
+    weight = 1
   
-  # Language tabs for code examples (like Stripe)
-  [[params.language_tabs]]
-    key = "shell"
-    name = "Shell"
-  [[params.language_tabs]]
-    key = "java"
+  [[menu.main]]
+    identifier = "java"
     name = "Java"
-  [[params.language_tabs]]
-    key = "python"
+    url = "/java/"
+    weight = 2
+  
+  [[menu.main]]
+    identifier = "python"
     name = "Python"
-  [[params.language_tabs]]
-    key = "javascript"
-    name = "JavaScript"
-  [[params.language_tabs]]
-    key = "go"
+    url = "/python/"
+    weight = 3
+  
+  [[menu.main]]
+    identifier = "nodejs"
+    name = "Node.js"
+    url = "/nodejs/"
+    weight = 4
+  
+  [[menu.main]]
+    identifier = "go"
     name = "Go"
-
-[languages.en]
-  languageName = "English"
-  weight = 1
-  title = "SDI API Documentation"
-  [languages.en.params]
-    toc_footers = [
-      "<a href='https://github.com/yourusername/sdi'>View on GitHub</a>",
-      "Documentation Powered by <a href='https://github.com/bep/docuapi'>DocuAPI</a>",
-    ]
+    url = "/go/"
+    weight = 5
+  
+  [[menu.main]]
+    identifier = "api"
+    name = "API Reference"
+    url = "/api/"
+    weight = 6
