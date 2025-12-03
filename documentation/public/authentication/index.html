@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Authentication# The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your application.yml or via environment variables.
+To authorize, use this code:
+1 2 3 # With shell, you can just pass the correct header with each request curl &#34;https://api.yourservice.com/api/sdi/analyze&#34; \ -H &#34;Authorization: Bearer sdi_test_your_key&#34; 1 2 3 import com.sdi.SdiClient; SdiClient client = new SdiClient(&#34;sdi_test_your_key&#34;); 1 2 3 import sdi client = sdi.SdiClient(api_key=&#39;sdi_test_your_key&#39;) 1 2 3 const sdi = require(&#39;sdi&#39;); const client = new sdi.Client(&#39;sdi_test_your_key&#39;); 1 2 3 4 5 package main import &#34;github.com/yourusername/sdi-go&#34; client := sdi.NewClient(&#34;sdi_test_your_key&#34;) Make sure to replace sdi_test_your_key with your API key.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/authentication/">
+  <meta property="og:site_name" content="SDI - Synthetic Digital Immunity">
+  <meta property="og:title" content="Authentication">
+  <meta property="og:description" content="Authentication# The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your application.yml or via environment variables.
+To authorize, use this code:
+1 2 3 # With shell, you can just pass the correct header with each request curl &#34;https://api.yourservice.com/api/sdi/analyze&#34; \ -H &#34;Authorization: Bearer sdi_test_your_key&#34; 1 2 3 import com.sdi.SdiClient; SdiClient client = new SdiClient(&#34;sdi_test_your_key&#34;); 1 2 3 import sdi client = sdi.SdiClient(api_key=&#39;sdi_test_your_key&#39;) 1 2 3 const sdi = require(&#39;sdi&#39;); const client = new sdi.Client(&#39;sdi_test_your_key&#39;); 1 2 3 4 5 package main import &#34;github.com/yourusername/sdi-go&#34; client := sdi.NewClient(&#34;sdi_test_your_key&#34;) Make sure to replace sdi_test_your_key with your API key.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+
+
+  <meta itemprop="name" content="Authentication">
+  <meta itemprop="description" content="Authentication# The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your application.yml or via environment variables.
+To authorize, use this code:
+1 2 3 # With shell, you can just pass the correct header with each request curl &#34;https://api.yourservice.com/api/sdi/analyze&#34; \ -H &#34;Authorization: Bearer sdi_test_your_key&#34; 1 2 3 import com.sdi.SdiClient; SdiClient client = new SdiClient(&#34;sdi_test_your_key&#34;); 1 2 3 import sdi client = sdi.SdiClient(api_key=&#39;sdi_test_your_key&#39;) 1 2 3 const sdi = require(&#39;sdi&#39;); const client = new sdi.Client(&#39;sdi_test_your_key&#39;); 1 2 3 4 5 package main import &#34;github.com/yourusername/sdi-go&#34; client := sdi.NewClient(&#34;sdi_test_your_key&#34;) Make sure to replace sdi_test_your_key with your API key.">
+  <meta itemprop="wordCount" content="212">
+
+<title>Authentication | SDI - Synthetic Digital Immunity</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/authentication/">
+<link rel="stylesheet" href="/book.min.6970156cec683193d93c9c4edaf0d56574e4361df2e0c1be4f697ae81c3ba55f.css" integrity="sha256-aXAVbOxoMZPZPJxO2vDVZXTkNh3y4MG&#43;T2l66Bw7pV8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.7a2a94e1ce61df0cbbd5931957e513c2a137935145c9da59ade2e7e4a0114d98.js" integrity="sha256-eiqU4c5h3wy71ZMZV&#43;UTwqE3k1FFydpZreLn5KARTZg=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-page">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/images/logo.png" alt="Logo" /><span>SDI - Synthetic Digital Immunity</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Authentication</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="authentication">Authentication<a class="anchor" href="#authentication">#</a></h1>
+<p>The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your <code>application.yml</code> or via environment variables.</p>
+<blockquote class='book-hint '>
+<p>To authorize, use this code:</p>
+</blockquote><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># With shell, you can just pass the correct header with each request</span>
+</span></span><span class="line"><span class="cl">curl <span class="s2">&#34;https://api.yourservice.com/api/sdi/analyze&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Authorization: Bearer sdi_test_your_key&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.sdi.SdiClient</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SdiClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SdiClient</span><span class="p">(</span><span class="s">&#34;sdi_test_your_key&#34;</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sdi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">sdi</span><span class="o">.</span><span class="n">SdiClient</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sdi_test_your_key&#39;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">sdi</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;sdi&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sdi</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="s1">&#39;sdi_test_your_key&#39;</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;github.com/yourusername/sdi-go&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sdi</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="s">&#34;sdi_test_your_key&#34;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class='book-hint '>
+<p>Make sure to replace <code>sdi_test_your_key</code> with your API key.</p>
+</blockquote><p><strong>Test mode</strong> uses the prefix <code>sdi_test_</code> and <strong>production mode</strong> uses the prefix <code>sdi_live_</code>. Alternatively, you can use service account tokens for granular permissions.</p>
+<p>Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
+<p>All API requests must be made over HTTPS in production. Calls made over plain HTTP will fail in production mode. API requests without authentication will also fail.</p>
+<p>SDI expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p><code>Authorization: Bearer sdi_test_your_key</code></p>
+<!-- raw HTML omitted -->
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+ 
+        
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

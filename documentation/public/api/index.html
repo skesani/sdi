@@ -1,1860 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8" />
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>
-      SDI API Reference
-    </title>
-    
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="API Reference# Complete API reference for SDI endpoints.
+Base URL# http://localhost:8080/api/sdiAuthentication# All requests require an API key:
+1 Authorization: Bearer your-api-key-here Endpoints# POST /api/sdi/analyze# Analyze a request for anomalies.
+Request:
+1 2 3 4 5 6 7 8 9 { &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/api/users/123&#34;, &#34;headers&#34;: { &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34; }, &#34;body&#34;: null, &#34;serviceId&#34;: &#34;user-service&#34; } Response:
+1 2 3 4 5 6 7 8 { &#34;anomalyDetected&#34;: false, &#34;anomalyScore&#34;: 0.12, &#34;severity&#34;: &#34;low&#34;, &#34;serviceId&#34;: &#34;user-service&#34;, &#34;timestamp&#34;: 1701234567890, &#34;pipelineTriggered&#34;: false } POST /api/sdi/detect# Quick anomaly detection only.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/api/">
+  <meta property="og:site_name" content="SDI - Synthetic Digital Immunity">
+  <meta property="og:title" content="API Reference">
+  <meta property="og:description" content="API Reference# Complete API reference for SDI endpoints.
+Base URL# http://localhost:8080/api/sdiAuthentication# All requests require an API key:
+1 Authorization: Bearer your-api-key-here Endpoints# POST /api/sdi/analyze# Analyze a request for anomalies.
+Request:
+1 2 3 4 5 6 7 8 9 { &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/api/users/123&#34;, &#34;headers&#34;: { &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34; }, &#34;body&#34;: null, &#34;serviceId&#34;: &#34;user-service&#34; } Response:
+1 2 3 4 5 6 7 8 { &#34;anomalyDetected&#34;: false, &#34;anomalyScore&#34;: 0.12, &#34;severity&#34;: &#34;low&#34;, &#34;serviceId&#34;: &#34;user-service&#34;, &#34;timestamp&#34;: 1701234567890, &#34;pipelineTriggered&#34;: false } POST /api/sdi/detect# Quick anomaly detection only.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 
 
+  <meta itemprop="name" content="API Reference">
+  <meta itemprop="description" content="API Reference# Complete API reference for SDI endpoints.
+Base URL# http://localhost:8080/api/sdiAuthentication# All requests require an API key:
+1 Authorization: Bearer your-api-key-here Endpoints# POST /api/sdi/analyze# Analyze a request for anomalies.
+Request:
+1 2 3 4 5 6 7 8 9 { &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/api/users/123&#34;, &#34;headers&#34;: { &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34; }, &#34;body&#34;: null, &#34;serviceId&#34;: &#34;user-service&#34; } Response:
+1 2 3 4 5 6 7 8 { &#34;anomalyDetected&#34;: false, &#34;anomalyScore&#34;: 0.12, &#34;severity&#34;: &#34;low&#34;, &#34;serviceId&#34;: &#34;user-service&#34;, &#34;timestamp&#34;: 1701234567890, &#34;pipelineTriggered&#34;: false } POST /api/sdi/detect# Quick anomaly detection only.">
+  <meta itemprop="wordCount" content="205">
+
+<title>API Reference | SDI - Synthetic Digital Immunity</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/api/">
+<link rel="stylesheet" href="/book.min.6970156cec683193d93c9c4edaf0d56574e4361df2e0c1be4f697ae81c3ba55f.css" integrity="sha256-aXAVbOxoMZPZPJxO2vDVZXTkNh3y4MG&#43;T2l66Bw7pV8=" crossorigin="anonymous">
 
 
-
-<link
-  href="/styles/screen.css"
-  rel="stylesheet"
-  media="screen"
-   />
-<link
-  href="/styles/print.css"
-  rel="stylesheet"
-  media="print"
-   />
-
-    
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.7a2a94e1ce61df0cbbd5931957e513c2a137935145c9da59ade2e7e4a0114d98.js" integrity="sha256-eiqU4c5h3wy71ZMZV&#43;UTwqE3k1FFydpZreLn5KARTZg=" crossorigin="anonymous"></script>
 
 
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/api/index.xml" title="SDI - Synthetic Digital Immunity" />
 
-
-<script
-  src="/js/index.js"
   
-  defer></script>
+</head>
+<body dir="ltr" class="book-kind-section book-type-api">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/images/logo.png" alt="Logo" /><span>SDI - Synthetic Digital Immunity</span>
+  </a>
+</h2>
 
-    
-    <style>
-      [x-cloak] {
-        display: none !important;
-      }
-    </style>
-  </head>
-  <body class="index" x-data="{ navOpen: false }" x-cloak>
-    <a
-      href="#"
-      id="nav-button"
-      @click="navOpen = !navOpen"
-      :class="{'open': navOpen }">
-      <span>
-        NAV
-        <img src="/images/navbar.png" />
-      </span>
-    </a>
-    <div class="toc-wrapper" :class="{'open': navOpen }">
-      
-      <img src="/images/logo.png" class="logo" />
 
-      
-        <div class="search" x-data="searchController">
-          <input
-            x-model.debounce.100ms="query"
-            type="search"
-            class="search"
-            id="input-search"
-            placeholder="Search" />
-          <ul
-            class="search-results visible"
-            x-show="results.length > 0"
-            x-transition.duration.700ms>
-            <template x-for="item in results">
-              <li>
-                <a x-text="item.title" :href="`#${item.id}`"></a>
-              </li>
-            </template>
-          </ul>
-        </div>
-      
-      
-  
-  
-    
-  
-  <ul
-    id="toc"
-    class="toc-list-h1"
-    x-data="tocController"
-    x-init="load([{&#34;id&#34;:&#34;analysis&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;the-analysis-object&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;attributes&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Attributes&#34;},{&#34;id&#34;:&#34;the-analysis-object-1&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;The Analysis object&#34;}],&#34;title&#34;:&#34;The Analysis object&#34;},{&#34;id&#34;:&#34;post-apisdianalyze&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;parameters&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Parameters&#34;},{&#34;id&#34;:&#34;returns&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Returns&#34;}],&#34;title&#34;:&#34;POST /api/sdi/analyze&#34;}],&#34;title&#34;:&#34;Analysis&#34;},{&#34;id&#34;:&#34;getting-started&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;prerequisites&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Prerequisites&#34;},{&#34;id&#34;:&#34;installation&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;java-spring-boot&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Java (Spring Boot)&#34;},{&#34;id&#34;:&#34;python&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Python&#34;},{&#34;id&#34;:&#34;nodejs&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Node.js&#34;},{&#34;id&#34;:&#34;go&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Go&#34;}],&#34;title&#34;:&#34;Installation&#34;},{&#34;id&#34;:&#34;your-first-request&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Your First Request&#34;},{&#34;id&#34;:&#34;next-steps&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;Next Steps&#34;}],&#34;title&#34;:&#34;Getting Started&#34;},{&#34;id&#34;:&#34;authentication&#34;,&#34;level&#34;:1,&#34;sub&#34;:[],&#34;title&#34;:&#34;Authentication&#34;},{&#34;id&#34;:&#34;errors&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;error-object&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;attributes-1&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Attributes&#34;}],&#34;title&#34;:&#34;Error Object&#34;},{&#34;id&#34;:&#34;http-status-code-summary&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;HTTP Status Code Summary&#34;},{&#34;id&#34;:&#34;error-types&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Error Types&#34;},{&#34;id&#34;:&#34;handling-errors&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;Handling Errors&#34;}],&#34;title&#34;:&#34;Errors&#34;},{&#34;id&#34;:&#34;analysis-1&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;the-analysis-object-2&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;attributes-2&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Attributes&#34;},{&#34;id&#34;:&#34;the-analysis-object-1-1&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;The Analysis object&#34;}],&#34;title&#34;:&#34;The Analysis object&#34;},{&#34;id&#34;:&#34;post-apisdianalyze-1&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;parameters-1&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Parameters&#34;},{&#34;id&#34;:&#34;returns-1&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Returns&#34;},{&#34;id&#34;:&#34;example-detecting-sql-injection&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Example: Detecting SQL Injection&#34;}],&#34;title&#34;:&#34;POST /api/sdi/analyze&#34;}],&#34;title&#34;:&#34;Analysis&#34;}])"
-    @scroll.window="onScroll()">
-    
-    <template x-for="row in rows">
-      <li>
-        <a
-          x-text="row.title"
-          @click="click(row)"
-          :href="`#${row.id}`"
-          class="toc-link"
-          x-bind="rowClass(row)"></a>
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
         
-          <ul x-show="row.open" x-bind="transitions()" class="da-toc-list-h2">
-            <template x-for="row in row.sub">
-              <li>
-                <a
-                  x-text="row.title"
-                  @click="click(row)"
-                  :href="`#${row.id}`"
-                  class="toc-link"
-                  x-bind="rowClass(row)"></a>
-                
-                  <ul
-                    x-show="row.open"
-                    x-bind="transitions()"
-                    class="toc-list-h3">
-                    <template x-for="row in row.sub">
-                      <li>
-                        <a
-                          x-text="row.title"
-                          @click="click(row)"
-                          :href="`#${row.id}`"
-                          class="toc-link"
-                          x-bind="rowClass(row)"></a>
-                      </li>
-                    </template>
-                  </ul>
-                
-              </li>
-            </template>
-          </ul>
-        
-      </li>
-    </template>
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>API Reference</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#base-url">Base URL</a></li>
+    <li><a href="#authentication">Authentication</a></li>
+    <li><a href="#endpoints">Endpoints</a>
+      <ul>
+        <li><a href="#post-apisdianalyze">POST /api/sdi/analyze</a></li>
+        <li><a href="#post-apisdidetect">POST /api/sdi/detect</a></li>
+        <li><a href="#get-apisdihealth">GET /api/sdi/health</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-responses">Error Responses</a></li>
+    <li><a href="#rate-limits">Rate Limits</a></li>
+    <li><a href="#status-codes">Status Codes</a></li>
   </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
 
       
       
-        <ul class="toc-footer">
-          
-            <li>
-              <a href='https://github.com/yourusername/sdi'>View on GitHub</a>
-            </li>
-          
-            <li>
-              Documentation Powered by <a href='https://github.com/bep/docuapi'>DocuAPI</a>
-            </li>
-          
-        </ul>
+  <article class="markdown book-article"><h1 id="api-reference">API Reference<a class="anchor" href="#api-reference">#</a></h1>
+<p>Complete API reference for SDI endpoints.</p>
+<h2 id="base-url">Base URL<a class="anchor" href="#base-url">#</a></h2>
+<pre tabindex="0"><code>http://localhost:8080/api/sdi</code></pre><h2 id="authentication">Authentication<a class="anchor" href="#authentication">#</a></h2>
+<p>All requests require an API key:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Authorization: Bearer your-api-key-here</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="endpoints">Endpoints<a class="anchor" href="#endpoints">#</a></h2>
+<h3 id="post-apisdianalyze">POST /api/sdi/analyze<a class="anchor" href="#post-apisdianalyze">#</a></h3>
+<p>Analyze a request for anomalies.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;/api/users/123&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;headers&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;serviceId&#34;</span><span class="p">:</span> <span class="s2">&#34;user-service&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Response:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;anomalyDetected&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;anomalyScore&#34;</span><span class="p">:</span> <span class="mf">0.12</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;severity&#34;</span><span class="p">:</span> <span class="s2">&#34;low&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;serviceId&#34;</span><span class="p">:</span> <span class="s2">&#34;user-service&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span> <span class="mi">1701234567890</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;pipelineTriggered&#34;</span><span class="p">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="post-apisdidetect">POST /api/sdi/detect<a class="anchor" href="#post-apisdidetect">#</a></h3>
+<p>Quick anomaly detection only.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;/api/login&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="s2">&#34;username=admin&amp;password=test&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Response:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;anomalyDetected&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mf">0.87</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;severity&#34;</span><span class="p">:</span> <span class="s2">&#34;high&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="get-apisdihealth">GET /api/sdi/health<a class="anchor" href="#get-apisdihealth">#</a></h3>
+<p>Health check endpoint.</p>
+<p><strong>Response:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;healthy&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;service&#34;</span><span class="p">:</span> <span class="s2">&#34;sdi&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="error-responses">Error Responses<a class="anchor" href="#error-responses">#</a></h2>
+<p>All errors follow this format:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;error&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;anomaly_detected&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Anomaly detected in request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;anomaly_error&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;anomaly_score&#34;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;severity&#34;</span><span class="p">:</span> <span class="s2">&#34;high&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="rate-limits">Rate Limits<a class="anchor" href="#rate-limits">#</a></h2>
+<ul>
+<li>1000 requests per minute per API key</li>
+<li>10000 requests per hour per API key</li>
+</ul>
+<h2 id="status-codes">Status Codes<a class="anchor" href="#status-codes">#</a></h2>
+<ul>
+<li><code>200</code> - Success</li>
+<li><code>400</code> - Bad Request</li>
+<li><code>401</code> - Unauthorized</li>
+<li><code>403</code> - Anomaly Detected</li>
+<li><code>429</code> - Rate Limit Exceeded</li>
+<li><code>500</code> - Server Error</li>
+</ul>
+</article>
+ 
       
-      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+ 
+        
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-  
-    
-
-
-
-
-
-<h1 id="analysis">Analysis</h1>
-<p>Analyze a request for anomalies and security threats.</p>
-
-
-
-
-  
-
-
-
-<h2 id="the-analysis-object">The Analysis object</h2>
-<p>This is an object representing the analysis result of an HTTP request. You can retrieve it to see if an anomaly was detected and the confidence score.</p>
-<p>The top-level <code>anomalyDetected</code> and <code>anomalyScore</code> comprise your &ldquo;analysis result.&rdquo;</p>
-
-
-
-
-  
-
-
-
-<h3 id="attributes">Attributes</h3>
-
-
-
-
-  
-
-
-
-<h4 id="anomalydetected-boolean"><code>anomalyDetected</code> (boolean)</h4>
-<p>Whether an anomaly was detected in the request.</p>
-
-
-
-
-  
-
-
-
-<h4 id="anomalyscore-number"><code>anomalyScore</code> (number)</h4>
-<p>Confidence score of the detected anomaly (0.0 to 1.0). Higher values indicate higher confidence.</p>
-
-
-
-
-  
-
-
-
-<h4 id="severity-string"><code>severity</code> (string)</h4>
-<p>Severity level of the detected anomaly. One of <code>low</code>, <code>medium</code>, <code>high</code>, or <code>critical</code>.</p>
-
-
-
-
-  
-
-
-
-<h4 id="serviceid-string"><code>serviceId</code> (string)</h4>
-<p>Identifier for the service that made the request.</p>
-
-
-
-
-  
-
-
-
-<h4 id="timestamp-number"><code>timestamp</code> (number)</h4>
-<p>Unix timestamp of when the analysis was performed.</p>
-
-
-
-
-  
-
-
-
-<h4 id="pipelinetriggered-boolean"><code>pipelineTriggered</code> (boolean)</h4>
-<p>Whether the full PRE pipeline was triggered due to high severity.</p>
-
-
-
-
-  
-
-
-
-<h3 id="the-analysis-object-1">The Analysis object</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyDetected&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyScore&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.12</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;low&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;serviceId&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;timestamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1701234567890</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;pipelineTriggered&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h2 id="post-apisdianalyze">POST /api/sdi/analyze</h2>
-<p>Analyzes an HTTP request for anomalies and potential security threats.</p>
-
-
-
-
-  
-
-
-
-<h3 id="parameters">Parameters</h3>
-<table>
-  <thead>
-      <tr>
-          <th>Parameter</th>
-          <th>Type</th>
-          <th>Required</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>method</code></td>
-          <td>string</td>
-          <td>Yes</td>
-          <td>HTTP method (GET, POST, PUT, DELETE, etc.)</td>
-      </tr>
-      <tr>
-          <td><code>path</code></td>
-          <td>string</td>
-          <td>Yes</td>
-          <td>Request path</td>
-      </tr>
-      <tr>
-          <td><code>headers</code></td>
-          <td>object</td>
-          <td>No</td>
-          <td>HTTP headers as key-value pairs</td>
-      </tr>
-      <tr>
-          <td><code>body</code></td>
-          <td>string</td>
-          <td>No</td>
-          <td>Request body content</td>
-      </tr>
-      <tr>
-          <td><code>serviceId</code></td>
-          <td>string</td>
-          <td>No</td>
-          <td>Identifier for the service making the request</td>
-      </tr>
-  </tbody>
-</table>
-
-
-
-
-  
-
-
-
-<h3 id="returns">Returns</h3>
-<p>Returns an analysis object with anomaly detection results.</p>
-<p><strong>Request</strong></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl https://api.yourservice.com/api/sdi/analyze <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -X POST <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Authorization: Bearer sdi_test_your_key&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Content-Type: application/json&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -d <span style="color:#0a3069">&#39;{
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;method&#34;: &#34;GET&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;path&#34;: &#34;/api/users/123&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;headers&#34;: {
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      &#34;Accept&#34;: &#34;application/json&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    },
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;body&#34;: null,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;serviceId&#34;: &#34;user-service&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Response</strong></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyDetected&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyScore&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.12</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;low&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;serviceId&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;timestamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1701234567890</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;pipelineTriggered&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-  
-    
-
-
-
-  
-
-
-
-<h1 id="getting-started">Getting Started</h1>
-<p>Get up and running with SDI in 5 minutes. This guide will walk you through installing SDI and making your first API call.</p>
-<p><img src="/images/quick-start.png" alt="SDI Quick Start"></p>
-
-
-
-
-  
-
-
-
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li>A microservice application (Java, Python, Node.js, or Go)</li>
-<li>Kubernetes cluster (optional, for sidecar deployment)</li>
-<li>API key from your SDI dashboard</li>
-</ul>
-
-
-
-
-  
-
-
-
-<h2 id="installation">Installation</h2>
-
-
-
-
-  
-
-
-
-<h3 id="java-spring-boot">Java (Spring Boot)</h3>
-<p>Add the dependency to your <code>pom.xml</code>:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#0550ae">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&lt;groupId&gt;</span>com.sdi<span style="color:#0550ae">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&lt;artifactId&gt;</span>sdi-spring-boot-starter<span style="color:#0550ae">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&lt;version&gt;</span>1.0.0<span style="color:#0550ae">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">&lt;/dependency&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Or for Gradle:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>implementation <span style="color:#0a3069">&#39;com.sdi:sdi-spring-boot-starter:1.0.0&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Configure in <code>application.yml</code>:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#0550ae">sdi</span><span style="color:#1f2328">:</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">api-key</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>${SDI_API_KEY}<span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">enabled</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h3 id="python">Python</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install sdi-python
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">sdi</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>client <span style="color:#0550ae">=</span> sdi<span style="color:#0550ae">.</span>SdiClient<span style="color:#1f2328">(</span>api_key<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;your_api_key&#39;</span><span style="color:#1f2328">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h3 id="nodejs">Node.js</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install sdi-nodejs
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">sdi</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sdi&#39;</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">client</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Client</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;your_api_key&#39;</span><span style="color:#1f2328">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h3 id="go">Go</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/yourusername/sdi-go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;github.com/yourusername/sdi-go&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">client</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewClient</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;your_api_key&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h2 id="your-first-request">Your First Request</h2>
-<p>Let&rsquo;s analyze a simple HTTP request:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl https://api.yourservice.com/api/sdi/analyze <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -X POST <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Authorization: Bearer your_api_key&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Content-Type: application/json&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -d <span style="color:#0a3069">&#39;{
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;method&#34;: &#34;GET&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;path&#34;: &#34;/api/users&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;serviceId&#34;: &#34;my-service&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-
-
-
-<h2 id="next-steps">Next Steps</h2>
-<ul>
-<li>Read the <a href="/authentication/">Authentication guide</a> to learn about API keys</li>
-<li>Explore the <a href="/analyze/">Analysis endpoint</a> for detailed usage</li>
-<li>Check out <a href="/errors/">Error handling</a> for robust integration</li>
-<li>Deploy with <a href="/docs/deployment">Kubernetes sidecar</a> for automatic protection</li>
-</ul>
-
-  
-    
-
-
-
-  
-
-
-
-<h1 id="authentication">Authentication</h1>
-<p>The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your <code>application.yml</code> or via environment variables.</p>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#57606a"># With shell, you can just pass the correct header with each request</span>
-</span></span><span style="display:flex;"><span>curl <span style="color:#0a3069">&#34;https://api.yourservice.com/api/sdi/analyze&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Authorization: Bearer sdi_test_your_key&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">com.sdi.SdiClient</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>SdiClient<span style="color:#fff"> </span>client<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>SdiClient<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sdi_test_your_key&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">sdi</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>client <span style="color:#0550ae">=</span> sdi<span style="color:#0550ae">.</span>SdiClient<span style="color:#1f2328">(</span>api_key<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;sdi_test_your_key&#39;</span><span style="color:#1f2328">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">sdi</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sdi&#39;</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">client</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Client</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sdi_test_your_key&#39;</span><span style="color:#1f2328">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">package</span><span style="color:#fff"> </span><span style="color:#1f2328">main</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;github.com/yourusername/sdi-go&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">client</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewClient</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sdi_test_your_key&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>Make sure to replace <code>sdi_test_your_key</code> with your API key.</p>
-</blockquote>
-<p><strong>Test mode</strong> uses the prefix <code>sdi_test_</code> and <strong>production mode</strong> uses the prefix <code>sdi_live_</code>. Alternatively, you can use service account tokens for granular permissions.</p>
-<p>Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
-<p>All API requests must be made over HTTPS in production. Calls made over plain HTTP will fail in production mode. API requests without authentication will also fail.</p>
-<p>SDI expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-<p><code>Authorization: Bearer sdi_test_your_key</code></p>
-<aside class="notice">
-You must replace <code>sdi_test_your_key</code> with your personal API key.
-</aside>
-
-  
-    
-
-
-
-  
-
-
-
-<h1 id="errors">Errors</h1>
-<p>SDI uses conventional HTTP response codes to indicate the success or failure of an API request. In general:</p>
-<ul>
-<li>Codes in the <code>2xx</code> range indicate success.</li>
-<li>Codes in the <code>4xx</code> range indicate an error that failed given the information provided (e.g., a required parameter was omitted, an anomaly was detected, etc.).</li>
-<li>Codes in the <code>5xx</code> range indicate an error with SDI servers (these are rare).</li>
-</ul>
-<p>Some <code>4xx</code> errors that could be handled programmatically (e.g., an anomaly detected) include an error code that briefly explains the error reported.</p>
-
-
-
-
-  
-
-
-
-<h2 id="error-object">Error Object</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;error&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;code&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;anomaly_detected&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;message&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Anomaly detected in request&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;anomaly_error&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;anomaly_score&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.85</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;high&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h3 id="attributes-1">Attributes</h3>
-
-
-
-
-  
-
-
-
-<h4 id="code-nullable-string"><code>code</code> (nullable string)</h4>
-<p>For some errors that could be handled programmatically, a short string indicating the error code reported.</p>
-
-
-
-
-  
-
-
-
-<h4 id="message-nullable-string"><code>message</code> (nullable string)</h4>
-<p>A human-readable message providing more details about the error. For anomaly errors, these messages can be shown to your users.</p>
-
-
-
-
-  
-
-
-
-<h4 id="type-enum"><code>type</code> (enum)</h4>
-<p>The type of error returned. One of <code>anomaly_error</code>, <code>api_error</code>, <code>invalid_request_error</code>, or <code>authentication_error</code></p>
-<p>Possible enum values:</p>
-<ul>
-<li><code>anomaly_error</code> - An anomaly was detected in the request</li>
-<li><code>api_error</code> - API errors cover any other type of problem</li>
-<li><code>invalid_request_error</code> - Invalid request errors arise when your request has invalid parameters</li>
-<li><code>authentication_error</code> - Authentication errors occur when API keys are invalid or missing</li>
-</ul>
-
-
-
-
-  
-
-
-
-<h4 id="anomaly_score-nullable-number"><code>anomaly_score</code> (nullable number)</h4>
-<p>For anomaly errors, the confidence score of the detected anomaly (0.0 to 1.0).</p>
-
-
-
-
-  
-
-
-
-<h4 id="severity-nullable-string"><code>severity</code> (nullable string)</h4>
-<p>For anomaly errors, the severity level: <code>low</code>, <code>medium</code>, <code>high</code>, or <code>critical</code>.</p>
-
-
-
-
-  
-
-
-
-<h2 id="http-status-code-summary">HTTP Status Code Summary</h2>
-<table>
-  <thead>
-      <tr>
-          <th>Code</th>
-          <th>Status</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>200</td>
-          <td>OK</td>
-          <td>Everything worked as expected.</td>
-      </tr>
-      <tr>
-          <td>400</td>
-          <td>Bad Request</td>
-          <td>The request was unacceptable, often due to missing a required parameter.</td>
-      </tr>
-      <tr>
-          <td>401</td>
-          <td>Unauthorized</td>
-          <td>No valid API key provided.</td>
-      </tr>
-      <tr>
-          <td>403</td>
-          <td>Forbidden</td>
-          <td>The API key doesn&rsquo;t have permissions to perform the request.</td>
-      </tr>
-      <tr>
-          <td>404</td>
-          <td>Not Found</td>
-          <td>The requested resource doesn&rsquo;t exist.</td>
-      </tr>
-      <tr>
-          <td>429</td>
-          <td>Too Many Requests</td>
-          <td>Too many requests hit the API too quickly. We recommend an exponential backoff of your requests.</td>
-      </tr>
-      <tr>
-          <td>500, 502, 503, 504</td>
-          <td>Server Errors</td>
-          <td>Something went wrong on SDI&rsquo;s end. (These are rare.)</td>
-      </tr>
-  </tbody>
-</table>
-
-
-
-
-  
-
-
-
-<h2 id="error-types">Error Types</h2>
-<table>
-  <thead>
-      <tr>
-          <th>Type</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>anomaly_error</code></td>
-          <td>Anomaly errors are the most common type of error you should expect to handle. They result when SDI detects suspicious patterns in the request.</td>
-      </tr>
-      <tr>
-          <td><code>api_error</code></td>
-          <td>API errors cover any other type of problem (e.g., a temporary problem with SDI servers), and are extremely uncommon.</td>
-      </tr>
-      <tr>
-          <td><code>invalid_request_error</code></td>
-          <td>Invalid request errors arise when your request has invalid parameters.</td>
-      </tr>
-      <tr>
-          <td><code>authentication_error</code></td>
-          <td>Authentication errors occur when API keys are invalid or missing.</td>
-      </tr>
-  </tbody>
-</table>
-
-
-
-
-  
-
-
-
-<h2 id="handling-errors">Handling Errors</h2>
-<p>Our client libraries raise exceptions for many reasons, such as a detected anomaly, invalid parameters, authentication errors, and network unavailability. We recommend writing code that gracefully handles all possible API exceptions.</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#cf222e">try</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>AnalysisResponse<span style="color:#fff"> </span>response<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>sdiClient<span style="color:#1f2328">.</span><span style="color:#1f2328">analyze</span><span style="color:#1f2328">(</span>request<span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">catch</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>AnomalyDetectedException<span style="color:#fff"> </span>e<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Handle anomaly</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>log<span style="color:#1f2328">.</span><span style="color:#1f2328">warn</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Anomaly detected: {}&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>e<span style="color:#1f2328">.</span><span style="color:#1f2328">getAnomalyScore</span><span style="color:#1f2328">());</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">catch</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>SdiException<span style="color:#fff"> </span>e<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">// Handle other errors</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>log<span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;SDI error: {}&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>e<span style="color:#1f2328">.</span><span style="color:#1f2328">getMessage</span><span style="color:#1f2328">());</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">try</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    response <span style="color:#0550ae">=</span> client<span style="color:#0550ae">.</span>analyze<span style="color:#1f2328">(</span>request<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">except</span> sdi<span style="color:#0550ae">.</span>AnomalyDetectedError <span style="color:#cf222e">as</span> e<span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a"># Handle anomaly</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">f</span><span style="color:#0a3069">&#34;Anomaly detected: </span><span style="color:#0a3069">{</span>e<span style="color:#0550ae">.</span>anomaly_score<span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">except</span> sdi<span style="color:#0550ae">.</span>SdiException <span style="color:#cf222e">as</span> e<span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a"># Handle other errors</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">f</span><span style="color:#0a3069">&#34;SDI error: </span><span style="color:#0a3069">{</span>e<span style="color:#0550ae">.</span>message<span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">try</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">const</span> <span style="color:#1f2328">response</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">await</span> <span style="color:#1f2328">client</span><span style="color:#1f2328">.</span><span style="color:#1f2328">analyze</span><span style="color:#1f2328">(</span><span style="color:#1f2328">request</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span> <span style="color:#cf222e">catch</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">error</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">error</span><span style="color:#1f2328">.</span><span style="color:#1f2328">type</span> <span style="color:#0550ae">===</span> <span style="color:#0a3069">&#39;anomaly_error&#39;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#57606a">// Handle anomaly
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`Anomaly detected: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">error</span><span style="color:#1f2328">.</span><span style="color:#1f2328">anomaly_score</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span> <span style="color:#cf222e">else</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#57606a">// Handle other errors
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">error</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`SDI error: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">error</span><span style="color:#1f2328">.</span><span style="color:#1f2328">message</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-  
-    
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h1 id="analysis-1">Analysis</h1>
-<p>Analyze a request for anomalies and security threats. The analysis endpoint is the core of SDI&rsquo;s threat detection system.</p>
-<p><img src="/images/analysis-flow.png" alt="Analysis Flow"></p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h2 id="the-analysis-object-2">The Analysis object</h2>
-<p>This is an object representing the analysis result of an HTTP request. You can retrieve it to see if an anomaly was detected and the confidence score.</p>
-<p>The top-level <code>anomalyDetected</code> and <code>anomalyScore</code> comprise your &ldquo;analysis result.&rdquo;</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h3 id="attributes-2">Attributes</h3>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="anomalydetected-boolean-1"><code>anomalyDetected</code> (boolean)</h4>
-<p>Whether an anomaly was detected in the request.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="anomalyscore-number-1"><code>anomalyScore</code> (number)</h4>
-<p>Confidence score of the detected anomaly (0.0 to 1.0). Higher values indicate higher confidence.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="severity-string-1"><code>severity</code> (string)</h4>
-<p>Severity level of the detected anomaly. One of <code>low</code>, <code>medium</code>, <code>high</code>, or <code>critical</code>.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="serviceid-string-1"><code>serviceId</code> (string)</h4>
-<p>Identifier for the service that made the request.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="timestamp-number-1"><code>timestamp</code> (number)</h4>
-<p>Unix timestamp of when the analysis was performed.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h4 id="pipelinetriggered-boolean-1"><code>pipelineTriggered</code> (boolean)</h4>
-<p>Whether the full PRE pipeline was triggered due to high severity.</p>
-
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h3 id="the-analysis-object-1-1">The Analysis object</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyDetected&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyScore&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.12</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;low&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;serviceId&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;timestamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1701234567890</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;pipelineTriggered&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
 
-
-<h2 id="post-apisdianalyze-1">POST /api/sdi/analyze</h2>
-<p>Analyzes an HTTP request for anomalies and potential security threats. This endpoint uses machine learning models to detect suspicious patterns in real-time.</p>
-<p><img src="/images/request-flow.png" alt="Request Flow"></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl https://api.yourservice.com/api/sdi/analyze <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -X POST <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Authorization: Bearer sdi_test_your_key&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Content-Type: application/json&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -d <span style="color:#0a3069">&#39;{
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;method&#34;: &#34;GET&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;path&#34;: &#34;/api/users/123&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;headers&#34;: {
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      &#34;Accept&#34;: &#34;application/json&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    },
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;body&#34;: null,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;serviceId&#34;: &#34;user-service&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">com.sdi.SdiClient</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">com.sdi.api.SdiRestApi.AnalysisRequest</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#24292e">com.sdi.api.SdiRestApi.AnalysisResponse</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>SdiClient<span style="color:#fff"> </span>client<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>SdiClient<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sdi_test_your_key&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>AnalysisRequest<span style="color:#fff"> </span>request<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">new</span><span style="color:#fff"> </span>AnalysisRequest<span style="color:#1f2328">();</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>request<span style="color:#1f2328">.</span><span style="color:#1f2328">setMethod</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;GET&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>request<span style="color:#1f2328">.</span><span style="color:#1f2328">setPath</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;/api/users/123&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>request<span style="color:#1f2328">.</span><span style="color:#1f2328">setServiceId</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span>AnalysisResponse<span style="color:#fff"> </span>response<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>client<span style="color:#1f2328">.</span><span style="color:#1f2328">analyze</span><span style="color:#1f2328">(</span>request<span style="color:#1f2328">);</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span>response<span style="color:#1f2328">.</span><span style="color:#1f2328">isAnomalyDetected</span><span style="color:#1f2328">())</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>System<span style="color:#1f2328">.</span><span style="color:#1f2328">out</span><span style="color:#1f2328">.</span><span style="color:#1f2328">println</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Anomaly detected: &#34;</span><span style="color:#fff"> </span><span style="color:#0550ae">+</span><span style="color:#fff"> </span>response<span style="color:#1f2328">.</span><span style="color:#1f2328">getAnomalyScore</span><span style="color:#1f2328">());</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">sdi</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>client <span style="color:#0550ae">=</span> sdi<span style="color:#0550ae">.</span>SdiClient<span style="color:#1f2328">(</span>api_key<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;sdi_test_your_key&#39;</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>response <span style="color:#0550ae">=</span> client<span style="color:#0550ae">.</span>analyze<span style="color:#1f2328">(</span>
-</span></span><span style="display:flex;"><span>    method<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;GET&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    path<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;/api/users/123&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    headers<span style="color:#0550ae">=</span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0a3069">&#39;User-Agent&#39;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#39;Mozilla/5.0&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0a3069">&#39;Accept&#39;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#39;application/json&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>    service_id<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;user-service&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> response<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;anomaly_detected&#39;</span><span style="color:#1f2328">]:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">f</span><span style="color:#0a3069">&#34;Anomaly detected: </span><span style="color:#0a3069">{</span>response<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;anomaly_score&#39;</span><span style="color:#1f2328">]</span><span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">sdi</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">require</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sdi&#39;</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">client</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Client</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;sdi_test_your_key&#39;</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">response</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">await</span> <span style="color:#1f2328">client</span><span style="color:#1f2328">.</span><span style="color:#1f2328">analyze</span><span style="color:#1f2328">({</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">method</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;GET&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">path</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;/api/users/123&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">headers</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#39;User-Agent&#39;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;Mozilla/5.0&#39;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#39;Accept&#39;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;application/json&#39;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">serviceId</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;user-service&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">response</span><span style="color:#1f2328">.</span><span style="color:#1f2328">anomalyDetected</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">console</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#0a3069">`Anomaly detected: </span><span style="color:#0a3069">${</span><span style="color:#1f2328">response</span><span style="color:#1f2328">.</span><span style="color:#1f2328">anomalyScore</span><span style="color:#0a3069">}</span><span style="color:#0a3069">`</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">package</span><span style="color:#fff"> </span><span style="color:#1f2328">main</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">import</span><span style="color:#fff"> </span><span style="color:#1f2328">(</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#0a3069">&#34;github.com/yourusername/sdi-go&#34;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">client</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewClient</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;sdi_test_your_key&#34;</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">request</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">sdi</span><span style="color:#1f2328">.</span><span style="color:#1f2328">AnalysisRequest</span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">Method</span><span style="color:#1f2328">:</span><span style="color:#fff">    </span><span style="color:#0a3069">&#34;GET&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">Path</span><span style="color:#1f2328">:</span><span style="color:#fff">      </span><span style="color:#0a3069">&#34;/api/users/123&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">ServiceID</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">response</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">:=</span><span style="color:#fff"> </span><span style="color:#1f2328">client</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Analyze</span><span style="color:#1f2328">(</span><span style="color:#1f2328">request</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">err</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">nil</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#1f2328">response</span><span style="color:#1f2328">.</span><span style="color:#1f2328">AnomalyDetected</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Printf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Anomaly detected: %f&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#1f2328">response</span><span style="color:#1f2328">.</span><span style="color:#1f2328">AnomalyScore</span><span style="color:#1f2328">)</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyDetected&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyScore&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.12</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;low&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;serviceId&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;timestamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1701234567890</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;pipelineTriggered&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-
-
-
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
     
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h3 id="parameters-1">Parameters</h3>
-<table>
-  <thead>
-      <tr>
-          <th>Parameter</th>
-          <th>Type</th>
-          <th>Required</th>
-          <th>Description</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>method</code></td>
-          <td>string</td>
-          <td>Yes</td>
-          <td>HTTP method (GET, POST, PUT, DELETE, etc.)</td>
-      </tr>
-      <tr>
-          <td><code>path</code></td>
-          <td>string</td>
-          <td>Yes</td>
-          <td>Request path</td>
-      </tr>
-      <tr>
-          <td><code>headers</code></td>
-          <td>object</td>
-          <td>No</td>
-          <td>HTTP headers as key-value pairs</td>
-      </tr>
-      <tr>
-          <td><code>body</code></td>
-          <td>string</td>
-          <td>No</td>
-          <td>Request body content</td>
-      </tr>
-      <tr>
-          <td><code>serviceId</code></td>
-          <td>string</td>
-          <td>No</td>
-          <td>Identifier for the service making the request</td>
-      </tr>
-  </tbody>
-</table>
-
-
-
-
   
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+  <aside class="book-toc">
+    <div class="book-toc-content">
       
-    
-      
-    
-      
-    
-      
-    
-  
-
-
-
-<h3 id="returns-1">Returns</h3>
-<p>Returns an analysis object with anomaly detection results.</p>
-<aside class="warning">
-If `anomalyScore` exceeds 0.8, the full PRE pipeline is automatically triggered, which may include deploying honeypots and generating polymorphic defenses.
-</aside>
-
-
-
-
   
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#base-url">Base URL</a></li>
+    <li><a href="#authentication">Authentication</a></li>
+    <li><a href="#endpoints">Endpoints</a>
+      <ul>
+        <li><a href="#post-apisdianalyze">POST /api/sdi/analyze</a></li>
+        <li><a href="#post-apisdidetect">POST /api/sdi/detect</a></li>
+        <li><a href="#get-apisdihealth">GET /api/sdi/health</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-responses">Error Responses</a></li>
+    <li><a href="#rate-limits">Rate Limits</a></li>
+    <li><a href="#status-codes">Status Codes</a></li>
+  </ul>
+</nav>
 
 
-
-<h3 id="example-detecting-sql-injection">Example: Detecting SQL Injection</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl https://api.yourservice.com/api/sdi/analyze <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -X POST <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Authorization: Bearer sdi_test_your_key&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -H <span style="color:#0a3069">&#34;Content-Type: application/json&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -d <span style="color:#0a3069">&#39;{
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;method&#34;: &#34;GET&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;path&#34;: &#34;/api/users?id=1 OR 1=1&#34;,
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;headers&#34;: {},
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;serviceId&#34;: &#34;user-service&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">  }&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyDetected&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;anomalyScore&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.92</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;severity&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;critical&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;serviceId&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;user-service&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;timestamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1701234567890</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;pipelineTriggered&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
-  
 
-      </div>
-      <div class="dark-box">
-        
-          <div
-            class="lang-selector"
-            x-data="langController"
-            x-init="initLangs([{&#34;key&#34;:&#34;shell&#34;,&#34;name&#34;:&#34;Shell&#34;},{&#34;key&#34;:&#34;java&#34;,&#34;name&#34;:&#34;Java&#34;},{&#34;key&#34;:&#34;python&#34;,&#34;name&#34;:&#34;Python&#34;},{&#34;key&#34;:&#34;javascript&#34;,&#34;name&#34;:&#34;JavaScript&#34;},{&#34;key&#34;:&#34;go&#34;,&#34;name&#34;:&#34;Go&#34;}])">
-            <template x-for="(tab, index) in tabs">
-              <a
-                x-text="tab.name"
-                :class="{ 'active': tab.active }"
-                @click="changeLanguage(index)"></a>
-            </template>
-          </div>
-        
-      </div>
     </div>
-    
-  </body>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

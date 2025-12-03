@@ -4,9 +4,19 @@
   <url>
     <loc>http://localhost:1313/api/analyze/</loc>
   </url><url>
+    <loc>http://localhost:1313/getting-started/</loc>
+  </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
-    <loc>http://localhost:1313/getting-started/</loc>
+    <loc>http://localhost:1313/java/</loc>
+  </url><url>
+    <loc>http://localhost:1313/python/</loc>
+  </url><url>
+    <loc>http://localhost:1313/nodejs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/go/</loc>
+  </url><url>
+    <loc>http://localhost:1313/api/</loc>
   </url><url>
     <loc>http://localhost:1313/authentication/</loc>
   </url><url>
@@ -14,6 +24,8 @@
   </url><url>
     <loc>http://localhost:1313/analyze/</loc>
   </url><url>
-    <loc>http://localhost:1313/api/</loc>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>

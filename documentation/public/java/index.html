@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Java Setup - One Click Plug &amp; Play# Get SDI protection for your Java/Spring Boot application in under 5 minutes.
+Step 1: Add Dependency# Maven# Add to your pom.xml:
+1 2 3 4 5 &lt;dependency&gt; &lt;groupId&gt;com.sdi&lt;/groupId&gt; &lt;artifactId&gt;sdi-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;/dependency&gt; Gradle# Add to your build.gradle:
+1 implementation &#39;com.sdi:sdi-spring-boot-starter:1.0.0&#39; Step 2: Configure (Optional)# Create or update application.yml:
+1 2 3 4 5 6 7 8 9 10 11 12 sdi: enabled: true api-key: ${SDI_API_KEY:your-api-key-here} # Optional: Configure detection sensitivity detector: threshold: 0.8 # Anomaly score threshold (0.0-1.0) # Optional: Enable Kafka for distributed systems kafka: enabled: false bootstrap-servers: localhost:9092 Or use environment variables:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/java/">
+  <meta property="og:site_name" content="SDI - Synthetic Digital Immunity">
+  <meta property="og:title" content="Java Setup">
+  <meta property="og:description" content="Java Setup - One Click Plug &amp; Play# Get SDI protection for your Java/Spring Boot application in under 5 minutes.
+Step 1: Add Dependency# Maven# Add to your pom.xml:
+1 2 3 4 5 &lt;dependency&gt; &lt;groupId&gt;com.sdi&lt;/groupId&gt; &lt;artifactId&gt;sdi-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;/dependency&gt; Gradle# Add to your build.gradle:
+1 implementation &#39;com.sdi:sdi-spring-boot-starter:1.0.0&#39; Step 2: Configure (Optional)# Create or update application.yml:
+1 2 3 4 5 6 7 8 9 10 11 12 sdi: enabled: true api-key: ${SDI_API_KEY:your-api-key-here} # Optional: Configure detection sensitivity detector: threshold: 0.8 # Anomaly score threshold (0.0-1.0) # Optional: Enable Kafka for distributed systems kafka: enabled: false bootstrap-servers: localhost:9092 Or use environment variables:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+
+  <meta itemprop="name" content="Java Setup">
+  <meta itemprop="description" content="Java Setup - One Click Plug &amp; Play# Get SDI protection for your Java/Spring Boot application in under 5 minutes.
+Step 1: Add Dependency# Maven# Add to your pom.xml:
+1 2 3 4 5 &lt;dependency&gt; &lt;groupId&gt;com.sdi&lt;/groupId&gt; &lt;artifactId&gt;sdi-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;/dependency&gt; Gradle# Add to your build.gradle:
+1 implementation &#39;com.sdi:sdi-spring-boot-starter:1.0.0&#39; Step 2: Configure (Optional)# Create or update application.yml:
+1 2 3 4 5 6 7 8 9 10 11 12 sdi: enabled: true api-key: ${SDI_API_KEY:your-api-key-here} # Optional: Configure detection sensitivity detector: threshold: 0.8 # Anomaly score threshold (0.0-1.0) # Optional: Enable Kafka for distributed systems kafka: enabled: false bootstrap-servers: localhost:9092 Or use environment variables:">
+  <meta itemprop="wordCount" content="406">
+
+<title>Java Setup | SDI - Synthetic Digital Immunity</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/java/">
+<link rel="stylesheet" href="/book.min.6970156cec683193d93c9c4edaf0d56574e4361df2e0c1be4f697ae81c3ba55f.css" integrity="sha256-aXAVbOxoMZPZPJxO2vDVZXTkNh3y4MG&#43;T2l66Bw7pV8=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.7a2a94e1ce61df0cbbd5931957e513c2a137935145c9da59ade2e7e4a0114d98.js" integrity="sha256-eiqU4c5h3wy71ZMZV&#43;UTwqE3k1FFydpZreLn5KARTZg=" crossorigin="anonymous"></script>
+
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/java/index.xml" title="SDI - Synthetic Digital Immunity" />
+
+  
+</head>
+<body dir="ltr" class="book-kind-section book-type-java">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/images/logo.png" alt="Logo" /><span>SDI - Synthetic Digital Immunity</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Java Setup</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#step-1-add-dependency">Step 1: Add Dependency</a>
+      <ul>
+        <li><a href="#maven">Maven</a></li>
+        <li><a href="#gradle">Gradle</a></li>
+      </ul>
+    </li>
+    <li><a href="#step-2-configure-optional">Step 2: Configure (Optional)</a></li>
+    <li><a href="#step-3-use-it">Step 3: Use It</a></li>
+    <li><a href="#proof-it-works">Proof It Works</a>
+      <ul>
+        <li><a href="#test-1-normal-request-should-pass">Test 1: Normal Request (Should Pass)</a></li>
+        <li><a href="#test-2-sql-injection-attempt-should-be-detected">Test 2: SQL Injection Attempt (Should Be Detected)</a></li>
+        <li><a href="#test-3-check-detection-logs">Test 3: Check Detection Logs</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-configuration">Advanced Configuration</a>
+      <ul>
+        <li><a href="#custom-anomaly-threshold">Custom Anomaly Threshold</a></li>
+        <li><a href="#enable-kafka-for-multi-service">Enable Kafka for Multi-Service</a></li>
+        <li><a href="#programmatic-configuration">Programmatic Configuration</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#sdi-not-detecting-threats">SDI Not Detecting Threats?</a></li>
+        <li><a href="#performance-impact">Performance Impact?</a></li>
+      </ul>
+    </li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="java-setup---one-click-plug--play">Java Setup - One Click Plug &amp; Play<a class="anchor" href="#java-setup---one-click-plug--play">#</a></h1>
+<p>Get SDI protection for your Java/Spring Boot application in under 5 minutes.</p>
+<h2 id="step-1-add-dependency">Step 1: Add Dependency<a class="anchor" href="#step-1-add-dependency">#</a></h2>
+<h3 id="maven">Maven<a class="anchor" href="#maven">#</a></h3>
+<p>Add to your <code>pom.xml</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>com.sdi<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>sdi-spring-boot-starter<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="gradle">Gradle<a class="anchor" href="#gradle">#</a></h3>
+<p>Add to your <code>build.gradle</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;com.sdi:sdi-spring-boot-starter:1.0.0&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="step-2-configure-optional">Step 2: Configure (Optional)<a class="anchor" href="#step-2-configure-optional">#</a></h2>
+<p>Create or update <code>application.yml</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">sdi</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">api-key</span><span class="p">:</span><span class="w"> </span><span class="l">${SDI_API_KEY:your-api-key-here}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Optional: Configure detection sensitivity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">detector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="m">0.8</span><span class="w">  </span><span class="c"># Anomaly score threshold (0.0-1.0)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Optional: Enable Kafka for distributed systems</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kafka</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">bootstrap-servers</span><span class="p">:</span><span class="w"> </span><span class="l">localhost:9092</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Or use environment variables:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">SDI_API_KEY</span><span class="o">=</span>your-api-key-here
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">SDI_ENABLED</span><span class="o">=</span>true</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="step-3-use-it">Step 3: Use It<a class="anchor" href="#step-3-use-it">#</a></h2>
+<p>That&rsquo;s it! SDI automatically protects your endpoints:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/api/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&#34;/{id}&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// SDI automatically analyzes this request</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// No code changes needed!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="proof-it-works">Proof It Works<a class="anchor" href="#proof-it-works">#</a></h2>
+<h3 id="test-1-normal-request-should-pass">Test 1: Normal Request (Should Pass)<a class="anchor" href="#test-1-normal-request-should-pass">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl http://localhost:8080/api/users/123 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Authorization: Bearer valid-token&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Expected</strong>: Request succeeds, no anomalies detected</p>
+<h3 id="test-2-sql-injection-attempt-should-be-detected">Test 2: SQL Injection Attempt (Should Be Detected)<a class="anchor" href="#test-2-sql-injection-attempt-should-be-detected">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl <span class="s2">&#34;http://localhost:8080/api/users?id=1 OR 1=1&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Authorization: Bearer valid-token&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Expected</strong>:</p>
+<ul>
+<li>Anomaly detected (score &gt; 0.8)</li>
+<li>Request isolated to honeypot</li>
+<li>PRE pipeline triggered</li>
+</ul>
+<h3 id="test-3-check-detection-logs">Test 3: Check Detection Logs<a class="anchor" href="#test-3-check-detection-logs">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># View SDI logs</span>
+</span></span><span class="line"><span class="cl">tail -f logs/application.log <span class="p">|</span> grep SDI</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Expected Output</strong>:</p>
+<pre tabindex="0"><code>[SDI] Anomaly detected: score=0.92, severity=CRITICAL
+[SDI] Request isolated to honeypot: hp-abc123
+[SDI] PRE pipeline triggered: mutation-synthesis started</code></pre><h2 id="advanced-configuration">Advanced Configuration<a class="anchor" href="#advanced-configuration">#</a></h2>
+<h3 id="custom-anomaly-threshold">Custom Anomaly Threshold<a class="anchor" href="#custom-anomaly-threshold">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">sdi</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">detector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="m">0.7</span><span class="w">  </span><span class="c"># Lower = more sensitive</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="enable-kafka-for-multi-service">Enable Kafka for Multi-Service<a class="anchor" href="#enable-kafka-for-multi-service">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">sdi</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kafka</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">bootstrap-servers</span><span class="p">:</span><span class="w"> </span><span class="l">kafka-1:9092,kafka-2:9092</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="l">sdi-events</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="programmatic-configuration">Programmatic Configuration<a class="anchor" href="#programmatic-configuration">#</a></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SdiConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SdiProperties</span><span class="w"> </span><span class="nf">sdiProperties</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SdiProperties</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SdiProperties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">props</span><span class="p">.</span><span class="na">setEnabled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">props</span><span class="p">.</span><span class="na">setApiKey</span><span class="p">(</span><span class="s">&#34;your-key&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">props</span><span class="p">.</span><span class="na">getDetector</span><span class="p">().</span><span class="na">setThreshold</span><span class="p">(</span><span class="n">0</span><span class="p">.</span><span class="na">8</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">props</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting">#</a></h2>
+<h3 id="sdi-not-detecting-threats">SDI Not Detecting Threats?<a class="anchor" href="#sdi-not-detecting-threats">#</a></h3>
+<ol>
+<li>Check if SDI is enabled:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">sdi</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c"># Must be true</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Verify API key:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$SDI_API_KEY</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Check logs:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grep <span class="s2">&#34;SDI&#34;</span> logs/application.log</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="performance-impact">Performance Impact?<a class="anchor" href="#performance-impact">#</a></h3>
+<p>SDI adds &lt; 5ms latency per request. Monitor with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MetricsController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MeterRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&#34;/metrics/sdi&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">sdiMetrics</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="s">&#34;avgLatency&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">registry</span><span class="p">.</span><span class="na">timer</span><span class="p">(</span><span class="s">&#34;sdi.analysis&#34;</span><span class="p">).</span><span class="na">mean</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="s">&#34;requests&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">registry</span><span class="p">.</span><span class="na">counter</span><span class="p">(</span><span class="s">&#34;sdi.requests&#34;</span><span class="p">).</span><span class="na">count</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="next-steps">Next Steps<a class="anchor" href="#next-steps">#</a></h2>
+<ul>
+<li><a href="/api/">API Reference</a></li>
+<li><a href="/python/">Python Setup</a></li>
+<li><a href="/nodejs/">Node.js Setup</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+ 
+        
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#step-1-add-dependency">Step 1: Add Dependency</a>
+      <ul>
+        <li><a href="#maven">Maven</a></li>
+        <li><a href="#gradle">Gradle</a></li>
+      </ul>
+    </li>
+    <li><a href="#step-2-configure-optional">Step 2: Configure (Optional)</a></li>
+    <li><a href="#step-3-use-it">Step 3: Use It</a></li>
+    <li><a href="#proof-it-works">Proof It Works</a>
+      <ul>
+        <li><a href="#test-1-normal-request-should-pass">Test 1: Normal Request (Should Pass)</a></li>
+        <li><a href="#test-2-sql-injection-attempt-should-be-detected">Test 2: SQL Injection Attempt (Should Be Detected)</a></li>
+        <li><a href="#test-3-check-detection-logs">Test 3: Check Detection Logs</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-configuration">Advanced Configuration</a>
+      <ul>
+        <li><a href="#custom-anomaly-threshold">Custom Anomaly Threshold</a></li>
+        <li><a href="#enable-kafka-for-multi-service">Enable Kafka for Multi-Service</a></li>
+        <li><a href="#programmatic-configuration">Programmatic Configuration</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#sdi-not-detecting-threats">SDI Not Detecting Threats?</a></li>
+        <li><a href="#performance-impact">Performance Impact?</a></li>
+      </ul>
+    </li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
