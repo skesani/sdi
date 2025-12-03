@@ -1,14 +1,11 @@
 ---
-title: "SDI API Reference"
+title: "API Reference"
+weight: 6
 ---
 
-# SDI API Reference
+# API Reference
 
-The SDI API is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
-
-You can use the SDI API in test mode, which doesn't affect your production services. The API endpoint you use determines whether the request is in test mode or production mode.
-
-The SDI API doesn't support bulk updates. You can work on only one request per API call.
+Complete API reference for SDI endpoints.
 
 ## Base URL
 
@@ -16,19 +13,111 @@ The SDI API doesn't support bulk updates. You can work on only one request per A
 http://localhost:8080/api/sdi
 ```
 
-## Client Libraries
+## Authentication
 
-- Java (Spring Boot Starter)
-- Python SDK
-- Node.js SDK
-- Go SDK
+All requests require an API key:
 
-By default, the SDI API Docs demonstrate using `curl` to interact with the API over HTTP. Select one of our official client libraries to see examples in code.
+```bash
+Authorization: Bearer your-api-key-here
+```
 
-## Just getting started?
+## Endpoints
 
-Check out our [Getting Started Guide](/docs/getting-started/).
+### POST /api/sdi/analyze
 
-## Not a developer?
+Analyze a request for anomalies.
 
-Use SDI's sidecar pattern for automatic protection without code changes.
+**Request:**
+
+```json
+{
+  "method": "GET",
+  "path": "/api/users/123",
+  "headers": {
+    "User-Agent": "Mozilla/5.0"
+  },
+  "body": null,
+  "serviceId": "user-service"
+}
+```
+
+**Response:**
+
+```json
+{
+  "anomalyDetected": false,
+  "anomalyScore": 0.12,
+  "severity": "low",
+  "serviceId": "user-service",
+  "timestamp": 1701234567890,
+  "pipelineTriggered": false
+}
+```
+
+### POST /api/sdi/detect
+
+Quick anomaly detection only.
+
+**Request:**
+
+```json
+{
+  "method": "POST",
+  "path": "/api/login",
+  "body": "username=admin&password=test"
+}
+```
+
+**Response:**
+
+```json
+{
+  "anomalyDetected": true,
+  "score": 0.87,
+  "severity": "high"
+}
+```
+
+### GET /api/sdi/health
+
+Health check endpoint.
+
+**Response:**
+
+```json
+{
+  "status": "healthy",
+  "service": "sdi",
+  "version": "1.0.0"
+}
+```
+
+## Error Responses
+
+All errors follow this format:
+
+```json
+{
+  "error": {
+    "code": "anomaly_detected",
+    "message": "Anomaly detected in request",
+    "type": "anomaly_error",
+    "anomaly_score": 0.85,
+    "severity": "high"
+  }
+}
+```
+
+## Rate Limits
+
+- 1000 requests per minute per API key
+- 10000 requests per hour per API key
+
+## Status Codes
+
+- `200` - Success
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Anomaly Detected
+- `429` - Rate Limit Exceeded
+- `500` - Server Error
