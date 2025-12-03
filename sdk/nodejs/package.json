@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/skesani/sdi.git",
+    "url": "git+https://github.com/skesani/sdi.git",
     "directory": "sdk/nodejs"
   },
   "bugs": {
