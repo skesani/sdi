@@ -7,7 +7,7 @@ weight: 1
 
 Welcome to the SDI API! Synthetic Digital Immunity (SDI) is an AI-driven, bio-inspired cybersecurity solution for microservices that provides autonomous threat detection and polymorphic defense.
 
-![SDI Architecture Overview](/images/sdi-architecture.png)
+> **Note**: This documentation follows the same structure and style as [Stainless API docs](https://www.stainless.com/docs) for consistency and clarity.
 
 You can use our API to access SDI endpoints for analyzing HTTP requests, detecting anomalies, and protecting your microservices in real-time.
 
@@ -22,8 +22,6 @@ SDI mimics the human immune system's adaptive response to threats:
 - **Antigen Extraction**: Genetic algorithms identify attack signatures
 - **Mutation Synthesis**: Code mutations create polymorphic defenses
 - **Propagation**: Immunizations are deployed across the microservices ecosystem
-
-![SDI Pipeline Flow](/images/sdi-pipeline.png)
 
 ## Key Features
 
@@ -84,10 +82,8 @@ go get github.com/yourusername/sdi-go
 
 ## Just getting started?
 
-Check out our [Getting Started Guide](/docs/getting-started/).
+Check out our [Getting Started Guide](/getting-started).
 
 ## Not a developer?
 
 Use SDI's sidecar pattern for automatic protection without code changes. Deploy the SDI sidecar alongside your services in Kubernetes for instant protection.
-
-![Sidecar Pattern](/images/sidecar-pattern.png)
