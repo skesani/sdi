@@ -1,26 +1,10 @@
 # Synthetic Digital Immunity (SDI)
 
-**A Bio-Inspired Cybersecurity Framework for Autonomous Threat Detection and Self-Healing Microservices**
+AI-driven, bio-inspired cybersecurity solution for microservices providing autonomous threat detection and polymorphic defense.
 
-SDI is a comprehensive security library that provides your microservices with an artificial immune system. It detects anomalies, isolates threats, evolves defenses, and patches vulnerabilities automatically.
+## Quick Start
 
-## 📚 Documentation
-
-Full documentation is available in the `documentation/` directory. You can run it locally using [Hugo](https://gohugo.io/).
-
-- [Getting Started](documentation/content/docs/getting-started/_index.md)
-- [Architecture](documentation/content/docs/architecture/_index.md)
-- [Research Paper](documentation/content/research/_index.md)
-- [Development Guide](documentation/content/docs/development/_index.md)
-
-## 🚀 Features
-
-- **Autonomous Detection**: GMM-based anomaly detection
-- **Self-Healing**: Genetic algorithms for vulnerability patching
-- **Polyglot**: Works with Java, Python, Node.js, Go
-- **Cloud Native**: Built for Kubernetes and Microservices
-
-## 📦 Quick Install
+### Java (Spring Boot)
 
 ```xml
 <dependency>
@@ -30,12 +14,36 @@ Full documentation is available in the `documentation/` directory. You can run i
 </dependency>
 ```
 
-## 🧪 Testing
+### Python
 
 ```bash
-bash test-suite-complete.sh
+pip install sdi-python
 ```
 
-## 📄 License
+### Node.js
 
-MIT License
+```bash
+npm install sdi-nodejs
+```
+
+## Documentation
+
+📚 **Full Documentation**: [View Docs](http://localhost:1313) (run `cd documentation && hugo server`)
+
+## Features
+
+- ✅ Autonomous threat detection
+- ✅ Polymorphic defense
+- ✅ Platform independent (Java, Python, Node.js)
+- ✅ Kubernetes ready
+- ✅ Zero configuration
+
+## Published SDKs
+
+- ✅ **Node.js**: [npm - sdi-nodejs](https://www.npmjs.com/package/sdi-nodejs)
+- ⏳ **Python**: Ready to publish to PyPI
+- ⏳ **Java**: Ready to publish to Maven (JitPack)
+
+## License
+
+Apache-2.0

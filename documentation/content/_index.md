@@ -11,7 +11,7 @@ Welcome to the SDI API! Synthetic Digital Immunity (SDI) is an AI-driven, bio-in
 
 You can use our API to access SDI endpoints for analyzing HTTP requests, detecting anomalies, and protecting your microservices in real-time.
 
-We have language bindings in Shell, Java, Python, JavaScript, and Go! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in **Java**, **Python**, and **Node.js**! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 ## What is SDI?
 
@@ -39,10 +39,9 @@ http://localhost:8080/api/sdi
 
 ## Client Libraries
 
-- **Java**: Spring Boot Starter (Maven/Gradle)
+- **Java**: Spring Boot Starter (Maven/Gradle) - `com.sdi:sdi-spring-boot-starter:1.0.0`
 - **Python**: `pip install sdi-python`
 - **Node.js**: `npm install sdi-nodejs`
-- **Go**: `go get github.com/yourusername/sdi-go`
 
 By default, the SDI API Docs demonstrate using `curl` to interact with the API over HTTP. Select one of our official client libraries to see examples in code.
 
@@ -72,12 +71,6 @@ pip install sdi-python
 
 ```bash
 npm install sdi-nodejs
-```
-
-### Go
-
-```bash
-go get github.com/yourusername/sdi-go
 ```
 
 ## Just getting started?

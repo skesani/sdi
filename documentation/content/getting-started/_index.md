@@ -13,7 +13,6 @@ SDI (Synthetic Digital Immunity) provides **one-click, plug-and-play** cybersecu
   <a href="/java/" class="tab active">Java</a>
   <a href="/python/" class="tab">Python</a>
   <a href="/nodejs/" class="tab">Node.js</a>
-  <a href="/go/" class="tab">Go</a>
 </div>
 
 ## What You Get
@@ -31,7 +30,6 @@ See real examples and test results:
 - [Java Example](/java/#proof-it-works)
 - [Python Example](/python/#proof-it-works)
 - [Node.js Example](/nodejs/#proof-it-works)
-- [Go Example](/go/#proof-it-works)
 
 ## Architecture
 
@@ -50,4 +48,3 @@ SDI uses a bio-inspired approach:
 2. Follow the 5-minute setup
 3. Test with the provided examples
 4. Configure parameters (optional)
-

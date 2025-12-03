@@ -55,13 +55,7 @@ theme = 'book'
     weight = 4
   
   [[menu.main]]
-    identifier = "go"
-    name = "Go"
-    url = "/go/"
-    weight = 5
-  
-  [[menu.main]]
     identifier = "api"
     name = "API Reference"
     url = "/api/"
-    weight = 6
+    weight = 5
