@@ -1,0 +1,90 @@
+/* Dark/Light Theme Styles - Universal */
+:root {
+  /* Light Theme (Default) */
+  --bg-color: #ffffff;
+  --text-color: #0a2540;
+  --code-bg: #f6f9fc;
+  --code-text: #0a2540;
+  --border-color: #e6ebf1;
+  --link-color: #635bff;
+  --sidebar-bg: #fafbfc;
+  --sidebar-text: #0a2540;
+  --header-bg: #ffffff;
+  --code-block-bg: #f6f9fc;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --bg-color: #0a2540;
+  --text-color: #ffffff;
+  --code-bg: #1a1f35;
+  --code-text: #e6ebf1;
+  --border-color: #2d3748;
+  --link-color: #7c3aed;
+  --sidebar-bg: #0f172a;
+  --sidebar-text: #e6ebf1;
+  --header-bg: #0a2540;
+  --code-block-bg: #1a1f35;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+[data-theme="dark"] .theme-toggle {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  background: var(--bg-color);
+  border-color: var(--border-color);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: fill 0.3s ease;
+}
+
+/* Apply theme colors globally */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Code blocks */
+pre, code, .highlight {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Links */
+a {
+  transition: color 0.3s ease;
+}
+
+/* Tables */
+table {
+  transition: border-color 0.3s ease;
+}
+
+table th, table td {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

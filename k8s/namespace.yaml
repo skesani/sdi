@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sdi
+  labels:
+    name: sdi
+    app: synthetic-digital-immunity
+

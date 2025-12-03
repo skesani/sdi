@@ -1,0 +1,24 @@
+baseURL = 'http://localhost:1313/'
+languageCode = 'en-us'
+title = 'SDI API Documentation'
+theme = 'docsy'
+
+[params]
+  description = "Synthetic Digital Immunity API Documentation"
+  github_repo = "https://github.com/yourusername/sdi"
+  github_branch = "main"
+  
+[params.ui]
+  sidebar_search_disable = false
+  sidebar_menu_foldable = true
+  sidebar_menu_compact = false
+  
+[params.ui.sidebar]
+  nav_foldable = true
+  nav_foldable_section = true
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    codeFences = true
+    lineNos = true

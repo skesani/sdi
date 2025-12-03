@@ -1,0 +1,30 @@
+# Minimal SDI Configuration
+sdi:
+  enabled: true
+  
+  # Optional: Adjust detection sensitivity
+  detection:
+    threshold: 0.01  # Lower = more sensitive
+  
+  # Optional: Disable features you don't need
+  honeypot:
+    enabled: false  # Set to false if not using Kubernetes
+  
+  kafka:
+    enabled: false  # Set to false if not using Kafka
+    # enabled: true
+    # topic: sdi-anomalies
+  
+  deployment:
+    enabled: false  # Set to false if not using Kubernetes
+    # enabled: true
+    # canary-percentage: 0.05
+
+# Your application configuration
+spring:
+  application:
+    name: my-microservice
+
+server:
+  port: 8080
+

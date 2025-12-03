@@ -1,0 +1,48 @@
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /build
+
+# First, build sdi-core
+COPY sdi-core/pom.xml ./sdi-core/pom.xml
+COPY sdi-core/src ./sdi-core/src
+
+WORKDIR /build/sdi-core
+RUN mvn clean install -DskipTests
+
+# Then, build sdi-sidecar
+WORKDIR /build
+COPY sdi-sidecar/pom.xml ./sdi-sidecar/pom.xml
+COPY sdi-sidecar/src ./sdi-sidecar/src
+COPY sdi-sidecar/application.yml ./sdi-sidecar/src/main/resources/application.yml
+
+WORKDIR /build/sdi-sidecar
+RUN mvn clean package -DskipTests
+
+# Runtime image
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Install wget for healthcheck
+RUN apk add --no-cache wget
+
+# Copy SDI sidecar jar
+COPY --from=build /build/sdi-sidecar/target/*.jar sdi-sidecar.jar
+
+# Expose REST API port
+EXPOSE 8080
+
+# Expose gRPC port (optional, for future use)
+EXPOSE 9090
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/api/v1/health || exit 1
+
+# Environment variables with defaults
+ENV SDI_DETECTION_THRESHOLD=0.01
+ENV SDI_HONEYPOT_ENABLED=false
+ENV SDI_KAFKA_ENABLED=false
+ENV SDI_DEPLOYMENT_ENABLED=false
+
+# Run SDI Sidecar
+ENTRYPOINT ["java", "-jar", "sdi-sidecar.jar"]
+

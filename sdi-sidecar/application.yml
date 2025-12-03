@@ -1,0 +1,41 @@
+# SDI Configuration for sidecar mode
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sdi-sidecar
+
+# SDI Configuration
+sdi:
+  enabled: true
+  
+  detection:
+    threshold: ${SDI_DETECTION_THRESHOLD:0.01}
+  
+  honeypot:
+    enabled: ${SDI_HONEYPOT_ENABLED:false}
+  
+  kafka:
+    enabled: ${SDI_KAFKA_ENABLED:false}
+    topic: ${SDI_KAFKA_TOPIC:sdi-anomalies}
+  
+  deployment:
+    enabled: ${SDI_DEPLOYMENT_ENABLED:false}
+
+# Logging
+logging:
+  level:
+    com.sdi: INFO
+    root: INFO
+
+# Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+

@@ -1,0 +1,73 @@
+baseURL = 'http://localhost:1313/'
+languageCode = 'en-us'
+title = 'SDI API Documentation'
+theme = 'docuapi'
+
+disableKinds = ["taxonomy"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      autoHeadingIDType = "github-ascii"
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+    codeFences = true
+    lineNos = true
+
+[module]
+  [module.hugoVersion]
+    min = "0.116.0"
+  [[module.imports]]
+    path = "github.com/bep/docuapi/v2"
+  [[module.imports]]
+    path = "github.com/gohugoio/hugo-mod-jslibs-dist/alpinejs/v3"
+  [[module.imports]]
+    path = "github.com/olivernn/lunr.js"
+    [[module.imports.mounts]]
+      source = "lunr.js"
+      target = "assets/js/lib/lunr.js"
+  [[module.imports]]
+    path = "github.com/slatedocs/slate"
+    [[module.imports.mounts]]
+      source = "source/images"
+      target = "static/images"
+    [[module.imports.mounts]]
+      source = "source/fonts"
+      target = "static/fonts"
+    [[module.imports.mounts]]
+      source = "source/stylesheets"
+      target = "assets/scss/slate"
+
+[params]
+  description = "Synthetic Digital Immunity API Documentation"
+  search = true
+  maxMenuDepth = 3
+  
+  # Language tabs for code examples (like Stripe)
+  [[params.language_tabs]]
+    key = "shell"
+    name = "Shell"
+  [[params.language_tabs]]
+    key = "java"
+    name = "Java"
+  [[params.language_tabs]]
+    key = "python"
+    name = "Python"
+  [[params.language_tabs]]
+    key = "javascript"
+    name = "JavaScript"
+  [[params.language_tabs]]
+    key = "go"
+    name = "Go"
+
+[languages.en]
+  languageName = "English"
+  weight = 1
+  title = "SDI API Documentation"
+  [languages.en.params]
+    toc_footers = [
+      "<a href='https://github.com/yourusername/sdi'>View on GitHub</a>",
+      "Documentation Powered by <a href='https://github.com/bep/docuapi'>DocuAPI</a>",
+    ]

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SDI API Reference on SDI API Documentation</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in SDI API Reference on SDI API Documentation</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Analysis</title>
+      <link>http://localhost:1313/api/analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/api/analyze/</guid>
+      <description>&lt;h1 id=&#34;analysis-2&#34;&gt;Analysis&lt;/h1&gt;&#xA;&lt;p&gt;Analyze a request for anomalies and security threats.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h2 id=&#34;the-analysis-object-3&#34;&gt;The Analysis object&lt;/h2&gt;&#xA;&lt;p&gt;This is an object representing the analysis result of an HTTP request. You can retrieve it to see if an anomaly was detected and the confidence score.&lt;/p&gt;&#xA;&lt;p&gt;The top-level &lt;code&gt;anomalyDetected&lt;/code&gt; and &lt;code&gt;anomalyScore&lt;/code&gt; comprise your &amp;ldquo;analysis result.&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h3 id=&#34;attributes-3&#34;&gt;Attributes&lt;/h3&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h4 id=&#34;anomalydetected-boolean-2&#34;&gt;&lt;code&gt;anomalyDetected&lt;/code&gt; (boolean)&lt;/h4&gt;&#xA;&lt;p&gt;Whether an anomaly was detected in the request.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h4 id=&#34;anomalyscore-number-2&#34;&gt;&lt;code&gt;anomalyScore&lt;/code&gt; (number)&lt;/h4&gt;&#xA;&lt;p&gt;Confidence score of the detected anomaly (0.0 to 1.0). Higher values indicate higher confidence.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Authentication</title>
+      <link>http://localhost:1313/authentication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/authentication/</guid>
+      <description>&lt;h1 id=&#34;authentication&#34;&gt;Authentication&lt;/h1&gt;&#xA;&lt;p&gt;The SDI API uses API keys or service tokens to authenticate requests. You can configure authentication in your &lt;code&gt;application.yml&lt;/code&gt; or via environment variables.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Test mode&lt;/strong&gt; uses the prefix &lt;code&gt;sdi_test_&lt;/code&gt; and &lt;strong&gt;production mode&lt;/strong&gt; uses the prefix &lt;code&gt;sdi_live_&lt;/code&gt;. Alternatively, you can use service account tokens for granular permissions.&lt;/p&gt;&#xA;&lt;p&gt;Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Errors</title>
+      <link>http://localhost:1313/errors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/errors/</guid>
+      <description>&lt;h1 id=&#34;errors-1&#34;&gt;Errors&lt;/h1&gt;&#xA;&lt;p&gt;SDI uses conventional HTTP response codes to indicate the success or failure of an API request. In general:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Codes in the &lt;code&gt;2xx&lt;/code&gt; range indicate success.&lt;/li&gt;&#xA;&lt;li&gt;Codes in the &lt;code&gt;4xx&lt;/code&gt; range indicate an error that failed given the information provided (e.g., a required parameter was omitted, an anomaly was detected, etc.).&lt;/li&gt;&#xA;&lt;li&gt;Codes in the &lt;code&gt;5xx&lt;/code&gt; range indicate an error with SDI servers (these are rare).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Some &lt;code&gt;4xx&lt;/code&gt; errors that could be handled programmatically (e.g., an anomaly detected) include an error code that briefly explains the error reported.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Analysis</title>
+      <link>http://localhost:1313/analyze/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/analyze/</guid>
+      <description>&lt;h1 id=&#34;analysis-3&#34;&gt;Analysis&lt;/h1&gt;&#xA;&lt;p&gt;Analyze a request for anomalies and security threats.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h2 id=&#34;the-analysis-object-4&#34;&gt;The Analysis object&lt;/h2&gt;&#xA;&lt;p&gt;This is an object representing the analysis result of an HTTP request. You can retrieve it to see if an anomaly was detected and the confidence score.&lt;/p&gt;&#xA;&lt;p&gt;The top-level &lt;code&gt;anomalyDetected&lt;/code&gt; and &lt;code&gt;anomalyScore&lt;/code&gt; comprise your &amp;ldquo;analysis result.&amp;rdquo;&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h3 id=&#34;attributes-5&#34;&gt;Attributes&lt;/h3&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h4 id=&#34;anomalydetected-boolean-3&#34;&gt;&lt;code&gt;anomalyDetected&lt;/code&gt; (boolean)&lt;/h4&gt;&#xA;&lt;p&gt;Whether an anomaly was detected in the request.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;  &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;        &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;      &#xA;    &#xA;  &#xA;&#xA;&#xA;&#xA;&lt;h4 id=&#34;anomalyscore-number-3&#34;&gt;&lt;code&gt;anomalyScore&lt;/code&gt; (number)&lt;/h4&gt;&#xA;&lt;p&gt;Confidence score of the detected anomaly (0.0 to 1.0). Higher values indicate higher confidence.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,7 @@
+FROM python:3.9-slim
+WORKDIR /app
+COPY python-flask-app.py .
+RUN pip install --no-cache-dir flask
+ENV FLASK_APP=python-flask-app.py
+ENV SDI_ENDPOINT=http://localhost:8080
+CMD ["python", "python-flask-app.py"]
