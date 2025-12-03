@@ -5,7 +5,9 @@ weight: 30
 
 # Analysis
 
-Analyze a request for anomalies and security threats.
+Analyze a request for anomalies and security threats. The analysis endpoint is the core of SDI's threat detection system.
+
+![Analysis Flow](/images/analysis-flow.png)
 
 ## The Analysis object
 
@@ -48,7 +50,9 @@ Whether the full PRE pipeline was triggered due to high severity.
 
 ## POST /api/sdi/analyze
 
-Analyzes an HTTP request for anomalies and potential security threats.
+Analyzes an HTTP request for anomalies and potential security threats. This endpoint uses machine learning models to detect suspicious patterns in real-time.
+
+![Request Flow](/images/request-flow.png)
 
 ```shell
 curl https://api.yourservice.com/api/sdi/analyze \
@@ -80,6 +84,10 @@ request.setPath("/api/users/123");
 request.setServiceId("user-service");
 
 AnalysisResponse response = client.analyze(request);
+
+if (response.isAnomalyDetected()) {
+    System.out.println("Anomaly detected: " + response.getAnomalyScore());
+}
 ```
 
 ```python
@@ -96,6 +104,9 @@ response = client.analyze(
     },
     service_id='user-service'
 )
+
+if response['anomaly_detected']:
+    print(f"Anomaly detected: {response['anomaly_score']}")
 ```
 
 ```javascript
@@ -112,6 +123,10 @@ const response = await client.analyze({
   },
   serviceId: 'user-service'
 });
+
+if (response.anomalyDetected) {
+  console.log(`Anomaly detected: ${response.anomalyScore}`);
+}
 ```
 
 ```go
@@ -130,6 +145,13 @@ request := &sdi.AnalysisRequest{
 }
 
 response, err := client.Analyze(request)
+if err != nil {
+    log.Fatal(err)
+}
+
+if response.AnomalyDetected {
+    log.Printf("Anomaly detected: %f", response.AnomalyScore)
+}
 ```
 
 > The above command returns JSON structured like this:
@@ -158,3 +180,33 @@ response, err := client.Analyze(request)
 ### Returns
 
 Returns an analysis object with anomaly detection results.
+
+<aside class="warning">
+If `anomalyScore` exceeds 0.8, the full PRE pipeline is automatically triggered, which may include deploying honeypots and generating polymorphic defenses.
+</aside>
+
+### Example: Detecting SQL Injection
+
+```shell
+curl https://api.yourservice.com/api/sdi/analyze \
+  -X POST \
+  -H "Authorization: Bearer sdi_test_your_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "method": "GET",
+    "path": "/api/users?id=1 OR 1=1",
+    "headers": {},
+    "serviceId": "user-service"
+  }'
+```
+
+```json
+{
+  "anomalyDetected": true,
+  "anomalyScore": 0.92,
+  "severity": "critical",
+  "serviceId": "user-service",
+  "timestamp": 1701234567890,
+  "pipelineTriggered": true
+}
+```

@@ -4,13 +4,15 @@
   <url>
     <loc>http://localhost:1313/api/analyze/</loc>
   </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/getting-started/</loc>
+  </url><url>
     <loc>http://localhost:1313/authentication/</loc>
   </url><url>
     <loc>http://localhost:1313/errors/</loc>
   </url><url>
     <loc>http://localhost:1313/analyze/</loc>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
   </url><url>
     <loc>http://localhost:1313/api/</loc>
   </url>

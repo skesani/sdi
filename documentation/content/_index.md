@@ -5,15 +5,33 @@ weight: 1
 
 # Introduction
 
-Welcome to the SDI API! You can use our API to access SDI endpoints for analyzing HTTP requests, detecting anomalies, and protecting your microservices.
+Welcome to the SDI API! Synthetic Digital Immunity (SDI) is an AI-driven, bio-inspired cybersecurity solution for microservices that provides autonomous threat detection and polymorphic defense.
+
+![SDI Architecture Overview](/images/sdi-architecture.png)
+
+You can use our API to access SDI endpoints for analyzing HTTP requests, detecting anomalies, and protecting your microservices in real-time.
 
 We have language bindings in Shell, Java, Python, JavaScript, and Go! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-The SDI API is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+## What is SDI?
 
-You can use the SDI API in test mode, which doesn't affect your production services. The API endpoint you use determines whether the request is in test mode or production mode.
+SDI mimics the human immune system's adaptive response to threats:
 
-The SDI API doesn't support bulk updates. You can work on only one request per API call.
+- **Detection**: AI-powered anomaly detection analyzes request patterns
+- **Isolation**: Suspicious requests are routed to honeypots
+- **Antigen Extraction**: Genetic algorithms identify attack signatures
+- **Mutation Synthesis**: Code mutations create polymorphic defenses
+- **Propagation**: Immunizations are deployed across the microservices ecosystem
+
+![SDI Pipeline Flow](/images/sdi-pipeline.png)
+
+## Key Features
+
+- **Autonomous Threat Detection**: Machine learning models detect anomalies in real-time
+- **Polymorphic Defense**: Self-healing code mutations adapt to new threats
+- **Platform Independent**: Works with any language via REST API or sidecar pattern
+- **Zero Configuration**: Plug-and-play Spring Boot starter for Java applications
+- **Kubernetes Native**: Seamless integration with Kubernetes deployments
 
 ## Base URL
 
@@ -23,12 +41,46 @@ http://localhost:8080/api/sdi
 
 ## Client Libraries
 
-- Java (Spring Boot Starter)
-- Python SDK
-- Node.js SDK
-- Go SDK
+- **Java**: Spring Boot Starter (Maven/Gradle)
+- **Python**: `pip install sdi-python`
+- **Node.js**: `npm install sdi-nodejs`
+- **Go**: `go get github.com/yourusername/sdi-go`
 
 By default, the SDI API Docs demonstrate using `curl` to interact with the API over HTTP. Select one of our official client libraries to see examples in code.
+
+## Quick Start
+
+<aside class="notice">
+Get started in 5 minutes! Add the dependency to your project and start protecting your services immediately.
+</aside>
+
+### Java (Spring Boot)
+
+```xml
+<dependency>
+  <groupId>com.sdi</groupId>
+  <artifactId>sdi-spring-boot-starter</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+### Python
+
+```bash
+pip install sdi-python
+```
+
+### Node.js
+
+```bash
+npm install sdi-nodejs
+```
+
+### Go
+
+```bash
+go get github.com/yourusername/sdi-go
+```
 
 ## Just getting started?
 
@@ -36,4 +88,6 @@ Check out our [Getting Started Guide](/docs/getting-started/).
 
 ## Not a developer?
 
-Use SDI's sidecar pattern for automatic protection without code changes.
+Use SDI's sidecar pattern for automatic protection without code changes. Deploy the SDI sidecar alongside your services in Kubernetes for instant protection.
+
+![Sidecar Pattern](/images/sidecar-pattern.png)
