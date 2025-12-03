@@ -56,3 +56,9 @@ logs/
 tmp/
 temp/
 
+node_modules/
+*.log
+dist/
+.pytest_cache/
+__pycache__/
+*.pyc
