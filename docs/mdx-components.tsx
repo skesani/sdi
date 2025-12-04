@@ -1,3 +1,4 @@
+import React from 'react'
 import { useMDXComponents as useBaseComponents } from 'nextra-theme-docs'
 import MermaidCodeBlock from './components/MermaidCodeBlock'
 
@@ -14,7 +15,8 @@ export function useMDXComponents(components: any) {
         return <MermaidCodeBlock>{String(children).replace(/\n$/, '')}</MermaidCodeBlock>
       }
       
-      return <baseComponents.code {...rest} className={className}>{children}</baseComponents.code>
+      const CodeComponent = baseComponents.code as React.ComponentType<any>
+      return <CodeComponent {...rest} className={className}>{children}</CodeComponent>
     },
   }
 }

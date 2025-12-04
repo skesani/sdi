@@ -1,20 +1,22 @@
-import { useMDXComponents } from 'nextra-theme-docs'
+import React from 'react'
+import { useMDXComponents as useBaseComponents } from 'nextra-theme-docs'
 import MermaidCodeBlock from './MermaidCodeBlock'
 
 export function useComponents() {
-  const components = useMDXComponents()
+  const baseComponents = useBaseComponents()
   
   return {
-    ...components,
+    ...baseComponents,
     code: (props: any) => {
-      const { children, className } = props
-      const language = className?.replace('language-', '')
+      const { children, className = '', ...rest } = props
+      const language = className.replace('language-', '')
       
       if (language === 'mermaid') {
-        return <MermaidCodeBlock>{children}</MermaidCodeBlock>
+        return <MermaidCodeBlock>{String(children).replace(/\n$/, '')}</MermaidCodeBlock>
       }
       
-      return <components.code {...props} />
+      const CodeComponent = baseComponents.code as React.ComponentType<any>
+      return <CodeComponent {...rest} className={className}>{children}</CodeComponent>
     },
   }
 }
