@@ -1,0 +1,795 @@
+# Getting Started Guide
+
+A complete step-by-step guide to get SDI up and running from scratch.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- **Java 17 or higher** installed
+  - **Why**: SDI requires Java 17+ for modern language features
+  - **How to check**: Run `java -version`
+  - **How to install**: See Step 1 below
+
+- **Maven 3.6+** installed
+  - **Why**: Maven builds and manages dependencies
+  - **How to check**: Run `mvn -version`
+  - **How to install**: See Step 2 below
+
+- **Docker** (optional, for containerized deployment)
+  - **Why**: Containerization for consistent deployments
+  - **When needed**: Production deployments, CI/CD pipelines
+  - **How to install**: See [Local Setup Guide](/local-setup#docker-setup)
+
+- **Kubernetes cluster** (optional, for production deployment)
+  - **Why**: Orchestration for microservices, scaling, high availability
+  - **When needed**: Production, multi-service deployments
+  - **How to install**: See [Local Setup Guide](/local-setup#kubernetes-setup)
+
+- Basic knowledge of Spring Boot (helpful but not required)
+  - **Why**: SDI integrates with Spring Boot
+  - **What you need**: Basic understanding of Java and Spring Boot concepts
+  - **Learning resources**: [Spring Boot Guides](https://spring.io/guides)
+
+## Step 1: Verify Java Installation
+
+### Why Java is Needed
+
+Java is required because:
+- **SDI is built with Java**: The core library uses Java 17 features
+- **Spring Boot runs on JVM**: Spring Boot applications need Java Runtime Environment
+- **Maven needs Java**: Maven uses Java to compile and build projects
+
+### How to Check if Java is Installed
+
+First, check if Java is installed:
+
+```bash
+java -version
+```
+
+You should see something like:
+```
+openjdk version "17.0.x"
+OpenJDK Runtime Environment (build 17.0.x+xx)
+OpenJDK 64-Bit Server VM (build 17.0.x+xx, mixed mode, sharing)
+```
+
+### How to Install Java
+
+**If Java is NOT installed or version is below 17:**
+
+#### macOS (using Homebrew - Recommended):
+```bash
+# Install Homebrew if not installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install OpenJDK 17
+brew install openjdk@17
+
+# Set JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
+# Add to ~/.zshrc or ~/.bash_profile to make permanent
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zshrc
+```
+
+#### Linux (Ubuntu/Debian):
+```bash
+# Update package list
+sudo apt update
+
+# Install OpenJDK 17
+sudo apt install openjdk-17-jdk
+
+# Set JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# Add to ~/.bashrc to make permanent
+echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+```
+
+#### Linux (CentOS/RHEL):
+```bash
+# Install OpenJDK 17
+sudo yum install java-17-openjdk-devel
+
+# Set JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+```
+
+#### Windows:
+1. Download OpenJDK 17 from [Adoptium](https://adoptium.net/)
+2. Run the installer
+3. Set `JAVA_HOME` environment variable:
+   - Right-click "This PC" → Properties
+   - Advanced System Settings → Environment Variables
+   - Add new variable: `JAVA_HOME` = `C:\Program Files\Eclipse Adoptium\jdk-17.x.x-hotspot`
+   - Add to PATH: `%JAVA_HOME%\bin`
+
+#### Verify Installation:
+```bash
+java -version
+javac -version  # Should also work if JDK is installed
+echo $JAVA_HOME  # Should show Java installation path
+```
+
+## Step 2: Verify Maven Installation
+
+### Why Maven is Needed
+
+Maven is required because:
+- **Dependency Management**: Downloads and manages SDI and other libraries
+- **Build Tool**: Compiles Java code and packages into JAR files
+- **Project Structure**: Standardizes project layout
+- **Plugin System**: Runs tests, generates documentation, etc.
+
+### How to Check if Maven is Installed
+
+Check if Maven is installed:
+
+```bash
+mvn -version
+```
+
+You should see:
+```
+Apache Maven 3.8.x (or higher)
+Maven home: /usr/local/apache-maven
+Java version: 17.0.x
+```
+
+### How to Install Maven
+
+**If Maven is NOT installed or version is below 3.6:**
+
+#### macOS (using Homebrew - Recommended):
+```bash
+brew install maven
+
+# Verify installation
+mvn -version
+```
+
+#### Linux (Ubuntu/Debian):
+```bash
+# Install Maven
+sudo apt update
+sudo apt install maven
+
+# Verify installation
+mvn -version
+```
+
+#### Linux (CentOS/RHEL):
+```bash
+sudo yum install maven
+```
+
+#### Windows:
+1. Download Maven from [Maven website](https://maven.apache.org/download.cgi)
+2. Extract to `C:\Program Files\Apache\maven`
+3. Set environment variables:
+   - `MAVEN_HOME` = `C:\Program Files\Apache\maven`
+   - Add to PATH: `%MAVEN_HOME%\bin`
+4. Verify: Open new CMD window and run `mvn -version`
+
+#### Manual Installation (All Platforms):
+```bash
+# Download Maven
+wget https://downloads.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+
+# Extract
+tar -xzf apache-maven-3.9.5-bin.tar.gz
+sudo mv apache-maven-3.9.5 /opt/maven
+
+# Set environment variables
+export MAVEN_HOME=/opt/maven
+export PATH=$MAVEN_HOME/bin:$PATH
+
+# Add to ~/.bashrc or ~/.zshrc for permanent setup
+echo 'export MAVEN_HOME=/opt/maven' >> ~/.bashrc
+echo 'export PATH=$MAVEN_HOME/bin:$PATH' >> ~/.bashrc
+```
+
+## Step 3: Create a New Spring Boot Project
+
+### Option A: Using Spring Initializr (Recommended for Beginners)
+
+1. Go to [https://start.spring.io/](https://start.spring.io/)
+2. Select:
+   - **Project**: Maven
+   - **Language**: Java
+   - **Spring Boot**: 3.2.0 or higher
+   - **Group**: com.example (or your organization)
+   - **Artifact**: my-sdi-app
+   - **Packaging**: Jar
+   - **Java**: 17
+3. Click **Add Dependencies** and add:
+   - Spring Web
+   - Spring Boot DevTools
+4. Click **Generate** to download the project
+5. Extract the ZIP file to your desired location
+
+### Option B: Using Command Line
+
+```bash
+mkdir my-sdi-app
+cd my-sdi-app
+```
+
+## Step 4: Add SDI Dependency
+
+Open your `pom.xml` file and add the SDI dependency:
+
+```xml
+<dependencies>
+    <!-- Your existing Spring Boot dependencies -->
+    
+    <!-- SDI Spring Boot Starter -->
+    <dependency>
+        <groupId>com.sdi</groupId>
+        <artifactId>sdi-spring-boot-starter</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</dependencies>
+```
+
+> **Note**: Check [GitHub tags](https://github.com/skesani/sdi/tags) for the latest version.
+
+## Step 5: Configure Application Properties
+
+### Why Configuration is Needed
+
+SDI needs configuration to:
+- **Enable/disable features** based on your environment
+- **Set detection sensitivity** to match your security requirements
+- **Configure integrations** like Kafka for distributed systems
+- **Tune performance** parameters for your workload
+
+### Configuration Options Explained
+
+Create or edit `src/main/resources/application.yml`:
+
+```yaml
+sdi:
+  # Enable or disable SDI entirely
+  # Why: Allows you to turn SDI on/off without removing dependencies
+  # Default: true
+  enabled: true
+  
+  detection:
+    # Anomaly detection threshold (0.0 to 1.0)
+    # Why: Lower values = more sensitive (more false positives)
+    #      Higher values = less sensitive (may miss some threats)
+    # How to choose: Start with 0.8, adjust based on your false positive rate
+    # Recommended: 0.7-0.9 for production
+    threshold: 0.8
+    
+    # Enable anomaly detection
+    # Why: Allows disabling detection while keeping other features
+    # Default: true
+    enabled: true
+  
+  honeypot:
+    # Enable honeypot for isolating suspicious requests
+    # Why: Honeypots capture and analyze attacks without affecting real services
+    # Default: true
+    enabled: true
+    
+    # Port for honeypot service
+    # Why: Separate port prevents conflicts with main application
+    # How to choose: Use any available port (8081, 8082, etc.)
+    # Note: Make sure this port is not used by other services
+    port: 8081
+  
+  kafka:
+    # Enable Kafka for distributed event streaming
+    # Why: Kafka allows multiple SDI instances to share threat intelligence
+    # When to enable: Multi-service deployments, microservices architectures
+    # When to disable: Single service, local development
+    # Default: false
+    enabled: false
+    
+    # Kafka broker addresses
+    # Why: SDI needs to know where Kafka is running
+    # Format: host1:port1,host2:port2
+    # Example: localhost:9092 or kafka1:9092,kafka2:9092
+    # How to get: Check your Kafka installation or Docker container
+    bootstrap-servers: localhost:9092
+    
+    # Kafka topics for SDI events
+    # Why: Topics organize different types of events
+    # Default: Auto-created if auto-create-topics is enabled
+    topics:
+      anomalies: sdi-anomalies      # Anomaly detection events
+      mutations: sdi-mutations      # Code mutation events
+      immunizations: sdi-immunizations  # Immunization deployment events
+  
+  genetic:
+    # Population size for genetic algorithm
+    # Why: Larger populations = better solutions but slower convergence
+    # How to choose: 50-200 for most cases, 100 is a good balance
+    # Default: 100
+    population-size: 100
+    
+    # Maximum generations before stopping
+    # Why: Prevents infinite loops if algorithm doesn't converge
+    # How to choose: 50-200, typically converges in 75-100 generations
+    # Default: 100
+    max-generations: 100
+```
+
+Or use `application.properties`:
+
+```properties
+# Enable SDI
+sdi.enabled=true
+
+# Detection threshold (0.0-1.0)
+# Lower = more sensitive, Higher = less sensitive
+sdi.detection.threshold=0.8
+sdi.detection.enabled=true
+
+# Honeypot configuration
+sdi.honeypot.enabled=true
+sdi.honeypot.port=8081
+
+# Kafka configuration (set enabled=true if using Kafka)
+sdi.kafka.enabled=false
+sdi.kafka.bootstrap-servers=localhost:9092
+```
+
+## Step 6: Create Your Main Application Class
+
+Create `src/main/java/com/example/myapp/MyApplication.java`:
+
+```java
+package com.example.myapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+That's it! SDI will auto-configure itself.
+
+## Step 7: Run Your Application
+
+### Using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+### Using IDE:
+
+1. Open the project in your IDE (IntelliJ IDEA, Eclipse, VS Code)
+2. Right-click on `MyApplication.java`
+3. Select **Run 'MyApplication'**
+
+### Using JAR:
+
+```bash
+mvn clean package
+java -jar target/my-sdi-app-0.0.1-SNAPSHOT.jar
+```
+
+## Step 8: Verify SDI is Running
+
+Once your application starts, you should see logs like:
+
+```
+SDI Auto-Configuration enabled
+Anomaly Detector initialized
+Honeypot Manager started on port 8081
+```
+
+## Step 9: Test SDI Endpoints
+
+SDI exposes REST endpoints automatically. Test them:
+
+### Health Check
+
+```bash
+curl http://localhost:8080/api/sdi/health
+```
+
+Expected response:
+```json
+{
+  "status": "UP",
+  "sdi": {
+    "enabled": true,
+    "version": "1.0.0"
+  }
+}
+```
+
+### Analyze a Request
+
+```bash
+curl -X POST http://localhost:8080/api/sdi/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "method": "GET",
+    "path": "/api/users/123",
+    "headers": {
+      "User-Agent": "Test-Client"
+    },
+    "body": null
+  }'
+```
+
+Expected response:
+```json
+{
+  "anomaly_detected": false,
+  "anomaly_score": 0.15,
+  "severity": "LOW"
+}
+```
+
+## Step 10: Get API Token (For Production)
+
+### Why API Tokens are Needed
+
+API tokens provide:
+- **Security**: Authenticate API requests to prevent unauthorized access
+- **Rate Limiting**: Track usage per client/application
+- **Audit Trail**: Log which applications are using SDI
+- **Access Control**: Restrict access to specific endpoints
+
+**When to use**: Production environments, multi-tenant systems, public APIs
+
+**When NOT needed**: Local development, single-service deployments
+
+### How to Generate API Keys
+
+#### Option A: Using Environment Variables (Recommended for Production)
+
+**Why use environment variables:**
+- Keeps secrets out of code/config files
+- Easy to change without redeployment
+- Different values per environment (dev/staging/prod)
+
+**How to set:**
+
+```bash
+# Generate a secure random key (32 characters)
+export SDI_API_KEY=$(openssl rand -hex 16)
+
+# Generate a secure random secret (64 characters)
+export SDI_API_SECRET=$(openssl rand -hex 32)
+
+# Verify they're set
+echo $SDI_API_KEY
+echo $SDI_API_SECRET
+```
+
+**For Windows (PowerShell):**
+```powershell
+$env:SDI_API_KEY = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})
+$env:SDI_API_SECRET = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 64 | % {[char]$_})
+```
+
+**For Windows (CMD):**
+```cmd
+set SDI_API_KEY=your-secret-key-here
+set SDI_API_SECRET=your-secret-value-here
+```
+
+**Make them permanent:**
+
+**macOS/Linux** - Add to `~/.bashrc` or `~/.zshrc`:
+```bash
+export SDI_API_KEY=your-generated-key-here
+export SDI_API_SECRET=your-generated-secret-here
+```
+
+**Windows** - Add to System Environment Variables:
+1. Right-click "This PC" → Properties
+2. Advanced System Settings → Environment Variables
+3. Add new variables
+
+#### Option B: Using Application Properties (For Development)
+
+**Why use properties file:**
+- Easy for local development
+- Quick testing
+- **NOT recommended for production** (secrets in code)
+
+**How to add to `application.yml`:**
+
+```yaml
+sdi:
+  security:
+    # API Key for authentication
+    # Why: Identifies your application
+    # How to generate: Use Option A commands above
+    # Format: Any string, recommend 32+ characters
+    api-key: your-secret-key-here
+    
+    # API Secret for signing requests
+    # Why: Signs requests to prevent tampering
+    # How to generate: Use Option A commands above
+    # Format: Any string, recommend 64+ characters
+    api-secret: your-secret-value-here
+```
+
+**For `application.properties`:**
+
+```properties
+# API Key (generate using: openssl rand -hex 16)
+sdi.security.api-key=your-secret-key-here
+
+# API Secret (generate using: openssl rand -hex 32)
+sdi.security.api-secret=your-secret-value-here
+```
+
+#### Option C: Generate Token Programmatically
+
+**Why use programmatic generation:**
+- Dynamic token rotation
+- Integration with secret management systems
+- Custom token formats
+
+**How to generate:**
+
+```java
+import com.sdi.security.TokenGenerator;
+import java.security.SecureRandom;
+
+public class TokenExample {
+    public static void main(String[] args) {
+        // Generate API Key (32 characters)
+        String apiKey = TokenGenerator.generateApiKey();
+        System.out.println("API Key: " + apiKey);
+        
+        // Generate API Secret (64 characters)
+        String apiSecret = TokenGenerator.generateApiSecret();
+        System.out.println("API Secret: " + apiSecret);
+        
+        // Or generate custom length
+        String customToken = TokenGenerator.generate(128); // 128 characters
+        System.out.println("Custom Token: " + customToken);
+    }
+}
+```
+
+**Manual generation (if no tools available):**
+
+```bash
+# Using OpenSSL (most systems)
+openssl rand -hex 16  # For API Key (32 chars)
+openssl rand -hex 32  # For API Secret (64 chars)
+
+# Using Python
+python3 -c "import secrets; print(secrets.token_hex(16))"  # API Key
+python3 -c "import secrets; print(secrets.token_hex(32))"  # API Secret
+
+# Using Node.js
+node -e "console.log(require('crypto').randomBytes(16).toString('hex'))"  # API Key
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"  # API Secret
+```
+
+### Using API Tokens in Requests
+
+Once you have tokens, use them in API requests:
+
+```bash
+# Using curl
+curl -X POST http://localhost:8080/api/sdi/analyze \
+  -H "X-API-Key: your-secret-key-here" \
+  -H "X-API-Secret: your-secret-value-here" \
+  -H "Content-Type: application/json" \
+  -d '{"method": "GET", "path": "/api/test"}'
+```
+
+### Best Practices
+
+1. **Never commit tokens to Git**
+   - Use `.gitignore` for config files with secrets
+   - Use environment variables or secret management
+
+2. **Rotate tokens regularly**
+   - Change tokens every 90 days
+   - Use different tokens per environment
+
+3. **Use strong tokens**
+   - Minimum 32 characters for keys
+   - Minimum 64 characters for secrets
+   - Use cryptographically secure random generators
+
+4. **Store securely**
+   - Use secret management systems (AWS Secrets Manager, HashiCorp Vault)
+   - Encrypt at rest
+   - Limit access to tokens
+
+## Step 11: Use SDI in Your Code
+
+### Basic Usage
+
+```java
+import com.sdi.detector.AnomalyDetector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyService {
+    
+    @Autowired
+    private AnomalyDetector detector;
+    
+    public void processRequest(HttpServletRequest request) {
+        if (detector.isAnomalous(request)) {
+            // Handle anomaly
+            System.out.println("Anomaly detected!");
+        } else {
+            // Process normally
+            System.out.println("Request is normal");
+        }
+    }
+}
+```
+
+### Advanced Usage with Polymorphic Response Engine
+
+```java
+import com.sdi.pre.PolymorphicResponseEngine;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Service
+public class AdvancedService {
+    
+    @Autowired
+    private PolymorphicResponseEngine pre;
+    
+    public ResponseEntity<?> handleRequest(HttpServletRequest request) {
+        return pre.processRequest(request);
+    }
+}
+```
+
+## Step 12: Configure Logging
+
+Add to `application.yml`:
+
+```yaml
+logging:
+  level:
+    com.sdi: DEBUG
+    root: INFO
+```
+
+## Step 13: Monitor SDI Metrics
+
+SDI exposes metrics at:
+
+```
+http://localhost:8080/actuator/metrics/sdi.detections
+http://localhost:8080/actuator/metrics/sdi.anomalies
+http://localhost:8080/actuator/metrics/sdi.response-time
+```
+
+Enable Actuator in `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+## Step 14: Deploy to Production
+
+### Using Docker
+
+Create `Dockerfile`:
+
+```dockerfile
+FROM openjdk:17-jdk-slim
+COPY target/my-sdi-app-*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+Build and run:
+
+```bash
+docker build -t my-sdi-app .
+docker run -p 8080:8080 my-sdi-app
+```
+
+### Using Kubernetes
+
+Create `deployment.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdi-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sdi-app
+  template:
+    metadata:
+      labels:
+        app: sdi-app
+    spec:
+      containers:
+      - name: sdi-app
+        image: my-sdi-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SDI_ENABLED
+          value: "true"
+```
+
+Deploy:
+
+```bash
+kubectl apply -f deployment.yaml
+```
+
+## Troubleshooting
+
+### Problem: Application won't start
+
+**Solution**: Check Java version:
+```bash
+java -version  # Should be 17+
+```
+
+### Problem: SDI not detecting anomalies
+
+**Solution**: Lower the threshold:
+```yaml
+sdi:
+  detection:
+    threshold: 0.5  # Lower = more sensitive
+```
+
+### Problem: Port already in use
+
+**Solution**: Change the port:
+```yaml
+server:
+  port: 8081
+```
+
+### Problem: Kafka connection errors
+
+**Solution**: Either disable Kafka or start Kafka:
+```yaml
+sdi:
+  kafka:
+    enabled: false  # Disable if not using Kafka
+```
+
+## Next Steps
+
+- Read the [Architecture](/architecture) documentation
+- Check out [Code Samples](/code-samples)
+- Review [Evaluation Metrics](/evaluation)
+- Explore [Advanced Configuration](/architecture#configuration)
+
+## Getting Help
+
+- **GitHub Issues**: [https://github.com/skesani/sdi/issues](https://github.com/skesani/sdi/issues)
+- **Documentation**: [https://github.com/skesani/sdi](https://github.com/skesani/sdi)
+- **Email**: sasi@nextechaisystems.com
+
+---
+
+**Congratulations!** You've successfully set up SDI. Start building secure applications! 🎉
+

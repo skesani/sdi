@@ -1,0 +1,521 @@
+/* Stripe-inspired minimalist styling */
+:root {
+  --nextra-primary-hue: 220deg;
+  --nextra-primary-saturation: 100%;
+}
+
+/* Clean, minimal code blocks */
+.nextra-code-block {
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Math rendering */
+.katex {
+  font-size: 1.1em;
+}
+
+.katex-display {
+  margin: 1.5em 0;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+  text-align: center;
+  margin: 2em 0;
+  background: transparent;
+}
+
+/* Clean typography */
+article {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  line-height: 1.7;
+}
+
+/* Code highlighting - GitHub style */
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Clean links */
+a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+table th,
+table td {
+  border: 1px solid var(--nextra-border-color);
+  padding: 0.75em;
+  text-align: left;
+}
+
+table th {
+  background-color: var(--nextra-bg-color);
+  font-weight: 600;
+}
+
+/* Blockquote styling */
+blockquote {
+  border-left: 4px solid var(--nextra-primary-color);
+  padding-left: 1em;
+  margin: 1.5em 0;
+  color: var(--nextra-text-color);
+  opacity: 0.9;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5em 0;
+}
+
+/* Logo styling - make it larger */
+.nextra-nav-container nav a[href="/"] {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+/* PDF viewer styling */
+iframe[src*=".pdf"] {
+  min-height: 600px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  iframe[src*=".pdf"] {
+    min-height: 400px;
+  }
+}
+
+/* Awesome About Page Styling */
+article h1:first-of-type {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+article h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--nextra-primary-color);
+}
+
+article h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--nextra-primary-color);
+}
+
+/* Profile section styling */
+article p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+/* Links styling */
+article a {
+  color: var(--nextra-primary-color);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+article a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* Tables - modern styling */
+article table {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+article table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+article table thead th {
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+article table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+article table tbody tr:hover {
+  background-color: rgba(102, 126, 234, 0.05);
+}
+
+article table tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Code blocks in tables */
+article table code {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #667eea;
+}
+
+/* List styling */
+article ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+article ul li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+article ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--nextra-primary-color);
+  font-weight: bold;
+}
+
+/* Horizontal rules */
+article hr {
+  border: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.mac-titlebar {
+  background: #f5f5f7;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.mac-titlebar .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.mac-titlebar .dot.red {
+  background: #ff5f57;
+}
+
+.mac-titlebar .dot.yellow {
+  background: #febc2e;
+}
+
+.mac-titlebar .dot.green {
+  background: #28c840;
+}
+
+.mac-titlebar .title {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Content Area */
+.content.container {
+  padding: 30px;
+}
+
+/* Timestamp */
+.timestamp {
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Headings */
+.mac-frame h1,
+.mac-frame h2,
+.mac-frame h3 {
+  font-weight: 600;
+  color: #222;
+}
+
+/* Name styling */
+.name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mac-frame a {
+  color: #007aff;
+  text-decoration: none;
+}
+
+.mac-frame a:hover {
+  text-decoration: underline;
+}
+
+/* Tables */
+.table-section {
+  margin-top: 25px;
+}
+
+.mac-frame table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+
+.mac-frame table thead {
+  background: #f9fafc;
+}
+
+.mac-frame table th,
+.mac-frame table td {
+  border: 1px solid #dcdcdc;
+  padding: 12px;
+}
+
+.mac-frame table th {
+  font-weight: 600;
+}
+
+.apple-note-card h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.apple-note-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.75rem;
+  margin-top: 25px;
+  line-height: 1.3;
+}
+
+.apple-note-card h2:first-of-type {
+  margin-top: 0;
+}
+
+.apple-note-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.75rem;
+  margin-top: 25px;
+  line-height: 1.3;
+}
+
+.apple-note-card h3:first-child {
+  margin-top: 0;
+}
+
+.apple-note-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+  margin-top: 0;
+  line-height: 1.2;
+  display: block;
+}
+
+.apple-note-card .links {
+  margin: 1rem 0;
+  display: block;
+}
+
+.apple-note-subtitle {
+  font-size: 1rem;
+  color: #666666;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.apple-note-section {
+  margin: 2rem 0;
+  padding-top: 1.5rem;
+}
+
+.apple-note-section:first-of-type {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.apple-note-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.apple-note-text p {
+  margin: 0.5rem 0;
+}
+
+.apple-note-link {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.apple-note-link:hover {
+  text-decoration: underline;
+}
+
+.apple-note-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.apple-note-table thead {
+  background: #f9fafc;
+}
+
+.apple-note-table th {
+  font-weight: 600;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  text-align: left;
+  color: #222;
+}
+
+.apple-note-table td {
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  color: #222;
+  font-weight: 400;
+}
+
+.apple-note-table-section {
+  margin-top: 25px;
+}
+
+.apple-note-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.apple-note-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #000000;
+  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.apple-note-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.apple-note-list li strong {
+  font-weight: 600;
+  color: #000000;
+}
+
+.apple-note-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 2rem 0;
+  border: none;
+}
+
+/* Dark mode support for macOS Notes style */
+@media (prefers-color-scheme: dark) {
+  .apple-note-card {
+    background: #1d1d1f;
+  }
+
+  .apple-note-header,
+  .apple-note-section h2,
+  .apple-note-section h3,
+  .apple-note-text,
+  .apple-note-table th,
+  .apple-note-table td,
+  .apple-note-list li {
+    color: #f5f5f7;
+  }
+
+  .apple-note-subtitle {
+    color: #86868b;
+  }
+
+  .apple-note-table th {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .apple-note-table td {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .apple-note-list li::before {
+    color: #f5f5f7;
+  }
+
+  .apple-note-link {
+    color: #0a84ff;
+  }
+
+  .apple-note-link:hover {
+    color: #409cff;
+  }
+}
+

@@ -1,0 +1,36 @@
+<!-- Template for ~/.m2/settings.xml -->
+<!-- Copy this to ~/.m2/settings.xml and fill in your credentials -->
+
+<settings>
+  <servers>
+    <server>
+      <id>ossrh</id>
+      <username>YOUR_SONATYPE_USERNAME</username>
+      <password>YOUR_SONATYPE_PASSWORD</password>
+    </server>
+  </servers>
+  
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>
+      </properties>
+    </profile>
+  </profiles>
+</settings>
+
+<!-- 
+Security Note: For production, consider using Maven password encryption:
+https://maven.apache.org/guides/mini/guide-encryption.html
+
+To encrypt passwords:
+1. Install maven-encryption-plugin
+2. Run: mvn --encrypt-password YOUR_PASSWORD
+3. Use encrypted password in settings.xml
+-->
+

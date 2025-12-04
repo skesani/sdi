@@ -1,0 +1,185 @@
+# Diagrams & Visuals
+
+## System Architecture
+
+### High-Level Architecture
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        A[Microservice Applications]
+    end
+    
+    subgraph "SDI Core"
+        B[Anomaly Detector]
+        C[Honeypot Manager]
+        D[Genetic Extractor]
+        E[Mutation Synthesizer]
+        F[Immunization Deployer]
+        G[Polymorphic Response Engine]
+    end
+    
+    subgraph "Infrastructure"
+        H[Kafka Event Stream]
+        I[Kubernetes Cluster]
+        J[Service Registry]
+    end
+    
+    A -->|HTTP Requests| B
+    B -->|Normal| A
+    B -->|Anomalous| C
+    C --> D
+    D --> E
+    E --> F
+    F -->|Deploy| A
+    
+    G --> B
+    G --> C
+    G --> D
+    G --> E
+    G --> F
+    
+    H --> G
+    G --> H
+    
+    I --> C
+    I --> F
+```
+
+## PRE Pipeline Flow
+
+```mermaid
+flowchart TD
+    Start([HTTP Request]) --> Detect{Anomaly Detector}
+    Detect -->|Normal| Normal[Process Normally]
+    Detect -->|Anomalous| Isolate[Route to Honeypot]
+    Isolate --> Extract[Genetic Extractor]
+    Extract --> Analyze{Signature Analysis}
+    Analyze -->|New Threat| Synthesize[Mutation Synthesizer]
+    Analyze -->|Known Threat| UseExisting[Use Existing Mutation]
+    Synthesize --> Deploy[Immunization Deployer]
+    UseExisting --> Deploy
+    Deploy --> Propagate[Propagate to Services]
+    Propagate --> End([Defense Active])
+    Normal --> End
+```
+
+## Genetic Algorithm Flow
+
+```mermaid
+graph LR
+    A[Initialize Population] --> B[Evaluate Fitness]
+    B --> C{Convergence?}
+    C -->|No| D[Selection]
+    C -->|Yes| E[Best Signature]
+    D --> F[Crossover]
+    F --> G[Mutation]
+    G --> B
+```
+
+## State Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: System Start
+    Idle --> Detecting: Request Received
+    Detecting --> Normal: Normal Request
+    Detecting --> Anomalous: Anomaly Detected
+    Anomalous --> Isolating: Route to Honeypot
+    Isolating --> Extracting: Capture Request
+    Extracting --> Synthesizing: Extract Signature
+    Synthesizing --> Deploying: Generate Mutation
+    Deploying --> Propagating: Deploy Mutation
+    Propagating --> Idle: Complete
+    Normal --> Idle: Complete
+```
+
+## Component Interaction
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Detector as Anomaly Detector
+    participant Honeypot as Honeypot Manager
+    participant Extractor as Genetic Extractor
+    participant Synthesizer as Mutation Synthesizer
+    participant Deployer as Immunization Deployer
+    
+    App->>Detector: HTTP Request
+    Detector->>Detector: Analyze Request
+    alt Normal Request
+        Detector->>App: Allow Request
+    else Anomalous Request
+        Detector->>Honeypot: Route Request
+        Honeypot->>Extractor: Capture Threat
+        Extractor->>Extractor: Extract Signature
+        Extractor->>Synthesizer: Signature Data
+        Synthesizer->>Synthesizer: Generate Mutation
+        Synthesizer->>Deployer: Mutation Code
+        Deployer->>App: Deploy Defense
+    end
+```
+
+## Data Flow
+
+```mermaid
+flowchart LR
+    A[Request Data] --> B[Feature Extraction]
+    B --> C[ML Model]
+    C --> D{Score > Threshold?}
+    D -->|Yes| E[Anomaly Event]
+    D -->|No| F[Normal Event]
+    E --> G[Kafka Topic]
+    F --> H[Process Request]
+    G --> I[PRE Processing]
+```
+
+## Figures
+
+The following figures are available in the `/diagrams` directory:
+
+- **Figure 1**: SDI Architecture (`figure1_sdi_architecture.png`)
+- **Figure 2**: PRE Pipeline (`figure2_pre_pipeline.png`)
+- **Figure 3**: GA Convergence (`figure3_ga_convergence.png`)
+- **Figure 4**: Mutation Topology (`figure4_mutation_topology.png`)
+
+### Embedding Images
+
+You can reference these figures in your documentation:
+
+```markdown
+![SDI Architecture](/diagrams/figure1_sdi_architecture.png)
+```
+
+## Architecture Diagrams PDF
+
+For comprehensive architecture documentation, see:
+
+📄 **[SDI Architecture Diagrams PDF](/Synthetic%20Digital%20Immunity%20(SDI)%20Architecture%20Diagrams.pdf)**
+
+This PDF contains detailed architectural diagrams, system design documentation, and visual representations of all SDI components and their interactions.
+
+## PlantUML Alternative
+
+If you prefer PlantUML syntax, you can use it with draw.io or convert to Mermaid:
+
+```plantuml
+@startuml
+actor User
+participant "Microservice" as App
+participant "Anomaly Detector" as Detector
+participant "Honeypot" as Honeypot
+participant "PRE" as PRE
+
+User -> App: HTTP Request
+App -> Detector: Analyze
+alt Anomalous
+    Detector -> Honeypot: Route
+    Honeypot -> PRE: Process
+    PRE -> App: Deploy Defense
+else Normal
+    Detector -> App: Allow
+end
+@enduml
+```
+

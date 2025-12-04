@@ -1,0 +1,112 @@
+# SDI - Synthetic Digital Immunity
+
+**AI-driven, bio-inspired cybersecurity solution for microservices**
+
+## Research Paper
+
+<div style={{ margin: '2em 0', border: '1px solid var(--nextra-border-color)', borderRadius: '8px', overflow: 'hidden' }}>
+  <div style={{ padding: '1em', background: 'var(--nextra-bg-color)', borderBottom: '1px solid var(--nextra-border-color)' }}>
+    <strong>Synthetic Digital Immunity - IEEE Style Research Paper</strong>
+    <a href="/Synthetic_Digital_Immunity_IEEE_Style.pdf" download style={{ float: 'right', fontSize: '0.9em' }}>Download PDF</a>
+  </div>
+  <iframe 
+    src="/Synthetic_Digital_Immunity_IEEE_Style.pdf"
+    width="100%"
+    height="800px"
+    style={{ border: 'none', display: 'block' }}
+    title="SDI Research Paper"
+  />
+</div>
+
+## Abstract
+
+Synthetic Digital Immunity (SDI) is an autonomous threat detection and polymorphic defense system inspired by the human immune system. SDI provides real-time anomaly detection, adaptive response generation, and self-healing capabilities for microservices architectures.
+
+### Key Features
+
+- **Autonomous Threat Detection**: AI-powered anomaly detection analyzes request patterns in real-time
+- **Polymorphic Defense**: Self-healing code mutations adapt to new threats automatically
+- **Platform Independent**: Works with any language via REST API or sidecar pattern
+- **Zero Configuration**: Plug-and-play Spring Boot starter for Java applications
+- **Kubernetes Native**: Seamless integration with Kubernetes deployments
+
+## Quick Start
+
+### Java (Spring Boot)
+
+Add the dependency to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.sdi</groupId>
+  <artifactId>sdi-spring-boot-starter</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+> **Note**: Check [GitHub tags](https://github.com/skesani/sdi/tags) for the latest version.
+
+SDI will auto-configure itself. No additional setup required!
+
+### Python
+
+```bash
+pip install sdi-python
+```
+
+```python
+from sdi import SDIClient
+
+client = SDIClient(api_url="http://localhost:8080/api/sdi")
+response = client.analyze(request_data)
+```
+
+### Node.js
+
+```bash
+npm install sdi-nodejs
+```
+
+```javascript
+const { SDIClient } = require('sdi-nodejs');
+
+const client = new SDIClient({ apiUrl: 'http://localhost:8080/api/sdi' });
+const response = await client.analyze(requestData);
+```
+
+## Base URL
+
+```
+http://localhost:8080/api/sdi
+```
+
+## What is SDI?
+
+SDI mimics the human immune system's adaptive response to threats:
+
+1. **Detection**: AI-powered anomaly detection analyzes request patterns
+2. **Isolation**: Suspicious requests are routed to honeypots
+3. **Antigen Extraction**: Genetic algorithms identify attack signatures
+4. **Mutation Synthesis**: Code mutations create polymorphic defenses
+5. **Propagation**: Immunizations are deployed across the microservices ecosystem
+
+## Research Papers & Documentation
+
+📄 **[Download IEEE Style Research Paper](/Synthetic_Digital_Immunity_IEEE_Style.pdf)** - Complete academic paper with methodology, evaluation, and references
+
+📄 **[Download Architecture Diagrams](/Synthetic%20Digital%20Immunity%20(SDI)%20Architecture%20Diagrams.pdf)** - Comprehensive system architecture documentation
+
+## Next Steps
+
+- 📚 **[Complete Getting Started Guide](/getting-started)** - Step-by-step tutorial from A-Z
+- 🐳 **[Local Setup Guide](/local-setup)** - Docker, Kafka, Kubernetes setup
+- Learn about the [System Architecture](/architecture)
+- 🤖 **[AI-Powered Detection Engine](/ai-engine)** - How SDI's Gaussian Mixture Model works
+- Understand the [Methodology & Math](/methodology)
+- View [Code Samples](/code-samples)
+- Explore [Diagrams & Visuals](/diagrams)
+- Review [Evaluation & Metrics](/evaluation)
+- Check [References](/references)
+- Read [Conclusion & Benefits](/conclusion) - Why SDI is needed and its benefits
+- Learn more [About the Author](/about)
+

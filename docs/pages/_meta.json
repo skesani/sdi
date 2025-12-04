@@ -1,0 +1,16 @@
+{
+  "index": "Abstract & Quick Start",
+  "getting-started": "Getting Started Guide",
+  "local-setup": "Local Setup (Docker, Kafka, K8s)",
+  "architecture": "System Architecture",
+  "ai-engine": "AI-Powered Detection Engine",
+  "methodology": "Methodology & Math",
+  "code-samples": "Code Samples",
+  "diagrams": "Diagrams & Visuals",
+  "evaluation": "Evaluation & Metrics",
+  "references": "References",
+  "downloads": "Downloads & Resources",
+  "conclusion": "Conclusion & Benefits",
+  "about": "About"
+}
+

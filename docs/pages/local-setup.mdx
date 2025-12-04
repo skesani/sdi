@@ -1,0 +1,1398 @@
+# Local Development Setup
+
+Complete guide for setting up SDI locally with Docker, Kafka, and Kubernetes.
+
+## Table of Contents
+
+1. [Basic Local Setup](#basic-local-setup)
+2. [Docker Setup](#docker-setup)
+3. [Kafka Setup](#kafka-setup)
+4. [Kubernetes Setup](#kubernetes-setup)
+5. [Complete Local Stack](#complete-local-stack)
+
+---
+
+## Basic Local Setup
+
+### Why Local Setup is Important
+
+Local setup allows you to:
+- **Develop and test** without affecting production
+- **Debug issues** in a controlled environment
+- **Learn SDI** without external dependencies
+- **Experiment** with configurations safely
+
+### Step 1: Install Prerequisites
+
+#### Install Java 17
+
+**Why Java 17 is needed:**
+- SDI requires Java 17+ for modern language features (records, pattern matching, etc.)
+- Spring Boot 3.x requires Java 17 minimum
+- Better performance and security than older versions
+
+**macOS (using Homebrew):**
+```bash
+# Install OpenJDK 17
+brew install openjdk@17
+
+# Set JAVA_HOME (temporary for current session)
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
+# Make permanent - add to ~/.zshrc or ~/.bash_profile
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+# Update package list
+sudo apt update
+
+# Install OpenJDK 17 JDK (includes compiler)
+sudo apt install openjdk-17-jdk
+
+# Set JAVA_HOME (temporary)
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# Make permanent - add to ~/.bashrc
+echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**Windows:**
+1. **Why**: Windows needs manual installation and PATH configuration
+2. **How**: 
+   - Download from [Adoptium](https://adoptium.net/temurin/releases/?version=17)
+   - Run installer
+   - Set environment variables:
+     - `JAVA_HOME` = `C:\Program Files\Eclipse Adoptium\jdk-17.x.x-hotspot`
+     - Add to PATH: `%JAVA_HOME%\bin`
+3. **Verify**: Open new CMD and run `java -version`
+
+#### Install Maven
+
+**macOS:**
+```bash
+brew install maven
+```
+
+**Linux:**
+```bash
+sudo apt install maven
+```
+
+**Windows:**
+1. Download from [Maven website](https://maven.apache.org/download.cgi)
+2. Extract and add to PATH
+
+#### Verify Installations
+
+```bash
+java -version    # Should show Java 17
+mvn -version     # Should show Maven 3.6+
+```
+
+### Step 2: Clone SDI Repository
+
+**Why clone the repository:**
+- **Source code access**: Modify and customize SDI
+- **Build from source**: Latest features and bug fixes
+- **Development**: Contribute to SDI project
+- **Understanding**: See how SDI works internally
+
+**How to clone:**
+
+```bash
+# Clone the repository
+git clone https://github.com/skesani/sdi.git
+
+# Navigate to project directory
+cd sdi
+
+# Check available branches/tags
+git tag  # See available versions
+git branch  # See branches
+```
+
+**If you don't have Git:**
+
+**macOS:**
+```bash
+brew install git
+```
+
+**Linux:**
+```bash
+sudo apt install git
+```
+
+**Windows:**
+Download from [git-scm.com](https://git-scm.com/download/win)
+
+### Step 3: Build the Project
+
+**Why build the project:**
+- **Compile code**: Convert Java source to bytecode
+- **Download dependencies**: Maven fetches required libraries
+- **Run tests**: Verify everything works
+- **Create JAR**: Package application for deployment
+
+**What the build does:**
+- `mvn clean`: Removes previous build artifacts
+- `mvn install`: Compiles, tests, and installs to local Maven repository
+
+```bash
+# Navigate to core module
+cd sdi-core
+
+# Build the project
+mvn clean install
+
+# What happens:
+# 1. Downloads dependencies (first time takes longer)
+# 2. Compiles Java source code
+# 3. Runs unit tests
+# 4. Packages into JAR file
+# 5. Installs to local Maven repo (~/.m2/repository)
+```
+
+**Build output location:**
+- JAR file: `target/sdi-spring-boot-starter-1.0.0.jar`
+- Test reports: `target/surefire-reports/`
+
+### Step 4: Run Locally
+
+**Why run locally:**
+- **Quick testing**: Test changes immediately
+- **Development**: See logs and debug easily
+- **No Docker needed**: Faster iteration cycle
+
+**How to run:**
+
+```bash
+# Run with Maven (recommended for development)
+mvn spring-boot:run
+
+# What happens:
+# 1. Compiles code if needed
+# 2. Starts embedded Tomcat server
+# 3. SDI auto-configures itself
+# 4. Application starts on port 8080
+```
+
+**Alternative ways to run:**
+
+```bash
+# Run JAR directly (after building)
+java -jar target/sdi-spring-boot-starter-1.0.0.jar
+
+# Run with custom port
+java -jar target/sdi-spring-boot-starter-1.0.0.jar --server.port=8081
+
+# Run with debug mode
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+```
+
+**SDI will start on `http://localhost:8080`**
+
+**Verify it's running:**
+```bash
+# Check health endpoint
+curl http://localhost:8080/api/sdi/health
+
+# Check logs for startup messages
+# You should see: "SDI Auto-Configuration enabled"
+```
+
+---
+
+## Docker Setup
+
+### Step 1: Install Docker
+
+**Why Docker is needed:**
+- **Consistency**: Same environment across dev/staging/prod
+- **Isolation**: Containers don't interfere with host system
+- **Portability**: Run anywhere Docker is installed
+- **Easy cleanup**: Remove containers without affecting system
+
+**macOS:**
+```bash
+# Install Docker Desktop (includes Docker CLI and GUI)
+brew install --cask docker
+
+# Start Docker Desktop application
+open -a Docker
+
+# Verify installation (wait for Docker to start)
+docker --version
+docker ps  # Should show empty list, not an error
+```
+
+**Linux:**
+```bash
+# Install Docker using official script
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Add your user to docker group (so you don't need sudo)
+sudo usermod -aG docker $USER
+
+# Log out and back in, then verify
+docker --version
+docker ps
+```
+
+**Windows:**
+1. **Why**: Windows needs Docker Desktop for containerization
+2. **How**:
+   - Download Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop)
+   - Install and restart computer if prompted
+   - Start Docker Desktop from Start menu
+   - Wait for Docker to start (whale icon in system tray)
+3. **Verify**: Open PowerShell and run `docker --version`
+4. **Note**: Requires WSL 2 (Windows Subsystem for Linux) - Docker Desktop will install it automatically
+
+### Step 2: Create Dockerfile
+
+**Why Dockerfile is needed:**
+- **Defines container image**: Tells Docker how to build your application
+- **Reproducible builds**: Same Dockerfile = same result everywhere
+- **Dependency management**: Ensures all dependencies are included
+- **Optimization**: Multi-stage builds reduce image size
+
+**What each line does:**
+- `FROM`: Base image (Java 17 runtime)
+- `WORKDIR`: Sets working directory inside container
+- `COPY`: Copies files into container
+- `RUN`: Executes commands during build
+- `EXPOSE`: Documents which port the app uses
+- `ENTRYPOINT`: Command to run when container starts
+
+Create `Dockerfile` in your project root:
+
+```dockerfile
+# Use Java 17 slim image (smaller size)
+# Why: Reduces image size, faster downloads
+FROM openjdk:17-jdk-slim
+
+# Set working directory inside container
+# Why: All commands run from this directory
+WORKDIR /app
+
+# Copy Maven wrapper and pom.xml first
+# Why: Docker caches layers - if dependencies don't change, rebuild is faster
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+
+# Download dependencies (cached if pom.xml doesn't change)
+# Why: Separates dependency download from code compilation
+RUN ./mvnw dependency:go-offline
+
+# Copy source code
+# Why: Code changes more often than dependencies
+COPY src ./src
+
+# Build application
+# Why: Compile and package into JAR file
+# -DskipTests: Skip tests during build (faster, but less safe)
+RUN ./mvnw clean package -DskipTests
+
+# Expose port 8080
+# Why: Documents which port the application uses
+# Note: Doesn't actually open the port, just documents it
+EXPOSE 8080
+
+# Run application when container starts
+# Why: Starts SDI when container is launched
+ENTRYPOINT ["java", "-jar", "target/sdi-spring-boot-starter-1.0.0.jar"]
+```
+
+### Step 3: Create .dockerignore
+
+```
+target/
+.mvn/
+.idea/
+*.iml
+.git/
+.gitignore
+README.md
+```
+
+### Step 4: Build Docker Image
+
+```bash
+docker build -t sdi:latest .
+```
+
+### Step 5: Run Docker Container
+
+**Why environment variables:**
+- **Configuration**: Override default settings without rebuilding image
+- **Security**: Keep secrets out of image
+- **Flexibility**: Different configs for different environments
+
+**Command breakdown:**
+- `docker run`: Creates and starts a new container
+- `-p 8080:8080`: Maps host port 8080 to container port 8080
+  - **Why**: Allows access from host machine
+  - **Format**: `host-port:container-port`
+- `-e`: Sets environment variable
+  - **Why**: Passes configuration to application
+- `sdi:latest`: Image name and tag
+  - **Why**: Tells Docker which image to use
+
+```bash
+# Basic run
+docker run -p 8080:8080 \
+  -e SDI_ENABLED=true \
+  -e SDI_DETECTION_THRESHOLD=0.8 \
+  sdi:latest
+
+# With more environment variables
+docker run -p 8080:8080 \
+  -e SDI_ENABLED=true \
+  -e SDI_DETECTION_THRESHOLD=0.8 \
+  -e SDI_KAFKA_ENABLED=false \
+  -e SDI_HONEPOT_PORT=8081 \
+  -e SDI_API_KEY=your-key-here \
+  sdi:latest
+
+# Run in background (detached mode)
+docker run -d -p 8080:8080 \
+  --name sdi-container \
+  -e SDI_ENABLED=true \
+  sdi:latest
+
+# View logs
+docker logs -f sdi-container
+
+# Stop container
+docker stop sdi-container
+
+# Remove container
+docker rm sdi-container
+```
+
+### Step 6: Test Docker Container
+
+```bash
+curl http://localhost:8080/api/sdi/health
+```
+
+### Docker Compose (Recommended)
+
+Create `docker-compose.yml`:
+
+```yaml
+version: '3.8'
+
+services:
+  sdi:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SDI_ENABLED=true
+      - SDI_DETECTION_THRESHOLD=0.8
+      - SDI_KAFKA_ENABLED=false
+    networks:
+      - sdi-network
+
+networks:
+  sdi-network:
+    driver: bridge
+```
+
+Run with:
+```bash
+docker-compose up -d
+```
+
+---
+
+## Kafka Setup
+
+### Option 1: Local Kafka with Docker (Easiest)
+
+#### Step 1: Create Kafka Docker Compose
+
+Create `docker-compose-kafka.yml`:
+
+```yaml
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+```
+
+#### Step 2: Start Kafka
+
+```bash
+docker-compose -f docker-compose-kafka.yml up -d
+```
+
+#### Step 3: Verify Kafka is Running
+
+```bash
+docker ps | grep kafka
+```
+
+#### Step 4: Configure SDI for Kafka
+
+**Why Kafka integration:**
+- **Event streaming**: Share threat intelligence across services
+- **Scalability**: Handle high-volume event processing
+- **Decoupling**: Services communicate asynchronously
+- **Durability**: Events are persisted and replayable
+
+**When to enable Kafka:**
+- ✅ Multiple microservices
+- ✅ High-volume traffic
+- ✅ Need event history/audit trail
+- ✅ Distributed deployments
+
+**When NOT to enable:**
+- ❌ Single service
+- ❌ Low traffic
+- ❌ Local development (unless testing Kafka features)
+
+**Configuration explained:**
+
+Update `application.yml`:
+
+```yaml
+sdi:
+  kafka:
+    # Enable Kafka integration
+    # Why: Turns on Kafka event streaming
+    # Default: false
+    enabled: true
+    
+    # Kafka broker addresses
+    # Why: SDI needs to know where Kafka is running
+    # Format: host1:port1,host2:port2 (comma-separated for multiple brokers)
+    # Local: localhost:9092
+    # Docker: kafka:9092 (use service name in Docker network)
+    # Production: kafka1.example.com:9092,kafka2.example.com:9092
+    # How to get: Check your Kafka installation or Docker container
+    bootstrap-servers: localhost:9092
+    
+    # Kafka topics for different event types
+    # Why: Topics organize events by type
+    # How to choose: Use descriptive names, follow naming conventions
+    # Default: Auto-created if auto-create-topics is enabled
+    topics:
+      anomalies: sdi-anomalies           # Anomaly detection events
+      mutations: sdi-mutations           # Code mutation events
+      immunizations: sdi-immunizations   # Immunization deployment events
+    
+    # Consumer group ID
+    # Why: Groups consumers for load balancing
+    # How to choose: Unique per application instance
+    # Default: sdi-consumer-group
+    consumer-group-id: sdi-consumer-group
+    
+    # Auto-create topics
+    # Why: Automatically creates topics if they don't exist
+    # When to enable: Development, testing
+    # When to disable: Production (create topics manually)
+    auto-create-topics: true
+```
+
+#### Step 5: Test Kafka Integration
+
+```bash
+# Produce a test message
+docker exec -it kafka kafka-console-producer \
+  --broker-list localhost:9092 \
+  --topic sdi-anomalies
+
+# Consume messages
+docker exec -it kafka kafka-console-consumer \
+  --bootstrap-server localhost:9092 \
+  --topic sdi-anomalies \
+  --from-beginning
+```
+
+### Option 2: Install Kafka Locally
+
+#### macOS:
+```bash
+brew install kafka
+brew services start zookeeper
+brew services start kafka
+```
+
+#### Linux:
+```bash
+wget https://downloads.apache.org/kafka/2.13-3.6.0/kafka_2.13-3.6.0.tgz
+tar -xzf kafka_2.13-3.6.0.tgz
+cd kafka_2.13-3.6.0
+
+# Start Zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+# In another terminal, start Kafka
+bin/kafka-server-start.sh config/server.properties
+```
+
+### Option 3: Use Confluent Platform
+
+```bash
+# Download Confluent Platform
+curl -O http://packages.confluent.io/archive/7.5/confluent-community-7.5.0.tar.gz
+tar -xzf confluent-community-7.5.0.tar.gz
+cd confluent-7.5.0
+
+# Start services
+bin/confluent local services start
+```
+
+---
+
+## Kubernetes Setup
+
+### Why Kubernetes is Needed
+
+Kubernetes provides:
+- **Orchestration**: Manages multiple containers and services
+- **Scaling**: Automatically scale based on load
+- **High Availability**: Restarts failed containers
+- **Service Discovery**: Containers can find each other
+- **Load Balancing**: Distributes traffic across instances
+- **Rolling Updates**: Update without downtime
+
+**When to use Kubernetes:**
+- ✅ Production deployments
+- ✅ Multiple services
+- ✅ Need auto-scaling
+- ✅ High availability requirements
+- ✅ Microservices architecture
+
+**When NOT needed:**
+- ❌ Single service
+- ❌ Simple applications
+- ❌ Local development (unless learning K8s)
+
+### Prerequisites
+
+#### Install kubectl
+
+**Why kubectl is needed:**
+- **Kubernetes CLI**: Command-line tool to interact with K8s clusters
+- **Deploy applications**: Create/update/delete resources
+- **Debug issues**: View logs, describe resources
+- **Manage clusters**: Essential for any K8s operation
+
+**macOS:**
+```bash
+# Install kubectl
+brew install kubectl
+
+# Verify installation
+kubectl version --client
+```
+
+**Linux:**
+```bash
+# Download latest kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# Install kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Verify installation
+kubectl version --client
+```
+
+**Windows:**
+1. **Why**: Windows needs manual installation
+2. **How**:
+   - Download from [kubernetes.io](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
+   - Add to PATH
+   - Or use: `choco install kubernetes-cli` (if Chocolatey installed)
+3. **Verify**: Open PowerShell and run `kubectl version --client`
+
+#### Install Minikube (Local Kubernetes)
+
+**Why Minikube is needed:**
+- **Local K8s cluster**: Run Kubernetes on your machine
+- **Learning**: Practice K8s without cloud setup
+- **Development**: Test K8s deployments locally
+- **Free**: No cloud costs for local development
+
+**macOS:**
+```bash
+# Install Minikube
+brew install minikube
+
+# Verify installation
+minikube version
+
+# Start Minikube (requires Docker or VirtualBox)
+minikube start
+```
+
+**Linux:**
+```bash
+# Download Minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+# Install Minikube
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# Verify installation
+minikube version
+
+# Start Minikube
+minikube start
+```
+
+**Windows:**
+1. **Why**: Windows needs manual installation
+2. **How**:
+   - Download from [minikube.sigs.k8s.io](https://minikube.sigs.k8s.io/docs/start/)
+   - Add to PATH
+   - Or use: `choco install minikube` (if Chocolatey installed)
+3. **Start**: `minikube start` (requires Docker Desktop or VirtualBox)
+
+### Step 1: Start Minikube
+
+**Why start Minikube:**
+- **Creates local cluster**: Sets up a single-node Kubernetes cluster
+- **Downloads images**: Pulls required container images
+- **Configures kubectl**: Points kubectl to Minikube cluster
+
+**How to start:**
+
+```bash
+# Start Minikube with Docker driver (recommended)
+minikube start --driver=docker
+
+# What happens:
+# 1. Creates a Docker container running Kubernetes
+# 2. Downloads Kubernetes images (~500MB first time)
+# 3. Configures kubectl to use Minikube cluster
+# 4. Takes 1-3 minutes first time
+
+# Check status
+minikube status
+
+# View cluster info
+kubectl cluster-info
+```
+
+**If Minikube fails to start:**
+
+```bash
+# Check Docker is running
+docker ps
+
+# Delete and recreate (if needed)
+minikube delete
+minikube start --driver=docker
+
+# Use more resources (if slow)
+minikube start --driver=docker --memory=4096 --cpus=2
+```
+
+### Step 2: Verify Kubernetes is Running
+
+**Why verify:**
+- **Confirms cluster is ready**: Ensures K8s is working
+- **Shows node status**: Verifies nodes are healthy
+- **Tests kubectl**: Confirms kubectl can communicate with cluster
+
+```bash
+# Get cluster nodes
+kubectl get nodes
+
+# Expected output:
+# NAME       STATUS   ROLES           AGE   VERSION
+# minikube   Ready    control-plane   1m    v1.28.x
+
+# Get all resources (should be empty initially)
+kubectl get all
+
+# Check cluster version
+kubectl version
+```
+
+### Step 3: Create Kubernetes Manifests
+
+**Why Kubernetes manifests:**
+- **Declarative configuration**: Describe desired state
+- **Version control**: Track changes in Git
+- **Reproducibility**: Same manifests = same deployment
+- **Infrastructure as Code**: Manage infrastructure like code
+
+**What each manifest does:**
+
+#### Namespace (`k8s/namespace.yaml`)
+
+**Why namespace:**
+- **Isolation**: Separates SDI resources from other applications
+- **Organization**: Groups related resources
+- **Permissions**: Apply RBAC per namespace
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sdi  # Namespace name - groups all SDI resources
+```
+
+#### ConfigMap (`k8s/configmap.yaml`)
+
+**Why ConfigMap:**
+- **Configuration management**: Stores configuration data
+- **Separation**: Keeps config separate from code
+- **Updates**: Change config without rebuilding images
+- **Multiple configs**: Different configs per environment
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sdi-config
+  namespace: sdi
+data:
+  application.yml: |
+    sdi:
+      enabled: true
+      detection:
+        threshold: 0.8  # Adjust based on your needs
+      kafka:
+        enabled: true
+        # Use service name in K8s (kafka:9092), not localhost
+        # Why: Services discover each other by name in K8s
+        bootstrap-servers: kafka:9092
+```
+
+#### Deployment (`k8s/deployment.yaml`)
+
+**Why Deployment:**
+- **Manages pods**: Creates and maintains pod replicas
+- **Rolling updates**: Update without downtime
+- **Rollback**: Revert to previous version if issues
+- **Scaling**: Scale up/down easily
+
+**Key fields explained:**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdi-app
+  namespace: sdi
+spec:
+  # Number of pod replicas
+  # Why: High availability and load distribution
+  # How to choose: Start with 2-3, scale based on load
+  # Production: 3-5 replicas minimum
+  replicas: 3
+  
+  selector:
+    matchLabels:
+      app: sdi-app  # Labels pods for this deployment
+  
+  template:
+    metadata:
+      labels:
+        app: sdi-app  # Must match selector
+    spec:
+      containers:
+      - name: sdi-app
+        image: sdi:latest
+        
+        # Image pull policy
+        # Why: Controls when to pull images
+        # Never: Use local image (for Minikube)
+        # Always: Always pull (for production)
+        # IfNotPresent: Pull if not local (default)
+        imagePullPolicy: Never
+        
+        ports:
+        - containerPort: 8080  # Port SDI listens on
+        
+        env:
+        # Environment variables
+        # Why: Override default configuration
+        # Format: name: value (always strings in YAML)
+        - name: SDI_ENABLED
+          value: "true"
+        - name: SDI_DETECTION_THRESHOLD
+          value: "0.8"
+        
+        volumeMounts:
+        # Mount ConfigMap as volume
+        # Why: Makes config available to container
+        - name: config
+          mountPath: /app/config  # Where config appears in container
+      
+      volumes:
+      - name: config
+        configMap:
+          name: sdi-config  # References ConfigMap created above
+```
+
+#### Service (`k8s/service.yaml`)
+
+**Why Service:**
+- **Service discovery**: Other pods can find SDI by name
+- **Load balancing**: Distributes traffic across pods
+- **Stable endpoint**: IP changes, but service name stays same
+- **External access**: Exposes SDI outside cluster
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sdi-service
+  namespace: sdi
+spec:
+  selector:
+    app: sdi-app  # Routes traffic to pods with this label
+  
+  ports:
+  - protocol: TCP
+    port: 80        # External port (what clients connect to)
+    targetPort: 8080  # Container port (where SDI listens)
+  
+  # Service type
+  # ClusterIP: Internal only (default)
+  # NodePort: Access via node IP
+  # LoadBalancer: External IP (cloud providers)
+  # Why: Determines how service is accessed
+  type: LoadBalancer
+```
+
+### Step 4: Build Docker Image for Kubernetes
+
+**Why build image for K8s:**
+- **Container requirement**: K8s runs containers, not code
+- **Consistency**: Same image runs everywhere
+- **Isolation**: Application runs in isolated environment
+
+**Why use Minikube's Docker:**
+- **Local registry**: Minikube has its own Docker daemon
+- **Image availability**: Images built locally are available to Minikube
+- **No registry needed**: Don't need Docker Hub or private registry
+
+```bash
+# Set Docker to use Minikube's Docker daemon
+# Why: Makes images available to Minikube cluster
+# What it does: Points Docker CLI to Minikube's Docker
+eval $(minikube docker-env)
+
+# Verify you're using Minikube's Docker
+docker ps  # Should show Minikube containers
+
+# Build image (now goes to Minikube's Docker)
+docker build -t sdi:latest .
+
+# Verify image exists
+docker images | grep sdi
+
+# Reset Docker to use local Docker (when done)
+eval $(minikube docker-env -u)
+```
+
+### Step 5: Deploy to Kubernetes
+
+**Why deploy step by step:**
+- **Order matters**: Namespace must exist before resources
+- **Dependencies**: ConfigMap should exist before Deployment uses it
+- **Error checking**: Easier to debug if one step fails
+
+**What each command does:**
+
+```bash
+# 1. Create namespace
+# Why: Creates isolated space for SDI resources
+# What: Creates the 'sdi' namespace
+kubectl apply -f k8s/namespace.yaml
+
+# Verify namespace created
+kubectl get namespaces | grep sdi
+
+# 2. Create ConfigMap
+# Why: Stores configuration for SDI
+# What: Creates configmap with application.yml
+kubectl apply -f k8s/configmap.yaml
+
+# Verify ConfigMap created
+kubectl get configmap -n sdi
+
+# View ConfigMap contents
+kubectl describe configmap sdi-config -n sdi
+
+# 3. Deploy application
+# Why: Creates pods running SDI
+# What: Creates Deployment, which creates 3 pods
+kubectl apply -f k8s/deployment.yaml
+
+# Verify deployment
+kubectl get deployments -n sdi
+
+# Watch pods being created
+kubectl get pods -n sdi -w
+
+# 4. Create service
+# Why: Exposes SDI to other pods/external access
+# What: Creates Service that routes traffic to pods
+kubectl apply -f k8s/service.yaml
+
+# Verify service created
+kubectl get services -n sdi
+
+# Or apply all at once (if all files are ready)
+kubectl apply -f k8s/
+```
+
+### Step 6: Verify Deployment
+
+```bash
+# Check pods
+kubectl get pods -n sdi
+
+# Check services
+kubectl get services -n sdi
+
+# Get logs
+kubectl logs -f deployment/sdi-app -n sdi
+```
+
+### Step 7: Access Application
+
+```bash
+# Port forward to access locally
+kubectl port-forward service/sdi-service 8080:80 -n sdi
+
+# Or get Minikube service URL
+minikube service sdi-service -n sdi
+```
+
+---
+
+## Complete Local Stack
+
+### Why Complete Local Stack
+
+A complete local stack includes:
+- **All dependencies**: Kafka, Redis, PostgreSQL in one setup
+- **Realistic environment**: Matches production setup
+- **Easy testing**: Test integrations locally
+- **One command**: Start everything with `docker-compose up`
+
+**When to use complete stack:**
+- ✅ Testing Kafka integration
+- ✅ Testing database features
+- ✅ End-to-end testing
+- ✅ Learning full SDI capabilities
+
+**When NOT needed:**
+- ❌ Simple testing
+- ❌ Quick development
+- ❌ Limited resources
+
+### Full Stack with Docker Compose
+
+**Why Docker Compose:**
+- **Orchestration**: Manages multiple containers together
+- **Networking**: Containers can communicate by name
+- **Dependencies**: Starts services in correct order
+- **Configuration**: All config in one file
+
+**What each service does:**
+- **Zookeeper**: Coordinates Kafka cluster
+- **Kafka**: Event streaming platform
+- **Redis**: Caching layer (optional but recommended)
+- **PostgreSQL**: Metrics storage (optional)
+- **SDI App**: Your application
+
+Create `docker-compose-full.yml`:
+
+```yaml
+version: '3.8'  # Docker Compose file format version
+
+services:
+  # Zookeeper for Kafka
+  # Why: Kafka requires Zookeeper for coordination
+  # What: Manages Kafka cluster metadata and coordination
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      # Client port for Zookeeper
+      # Why: Port that clients (Kafka) connect to
+      # Default: 2181
+      ZOOKEEPER_CLIENT_PORT: 2181
+      
+      # Tick time in milliseconds
+      # Why: Heartbeat interval for Zookeeper
+      # Default: 2000 (2 seconds)
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"  # Expose Zookeeper port to host
+    networks:
+      - sdi-network  # Connect to shared network
+
+  # Kafka - Event streaming platform
+  # Why: Handles high-volume event streaming for SDI
+  # What: Publishes and subscribes to event topics
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper  # Wait for Zookeeper to start first
+    ports:
+      - "9092:9092"  # Kafka broker port
+    environment:
+      # Unique broker ID
+      # Why: Each Kafka broker needs unique ID
+      # How to choose: 1, 2, 3... for multiple brokers
+      KAFKA_BROKER_ID: 1
+      
+      # Zookeeper connection string
+      # Why: Kafka needs Zookeeper for coordination
+      # Format: host:port
+      # Docker: Use service name (zookeeper:2181)
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      
+      # Advertised listeners
+      # Why: Tells clients how to connect to Kafka
+      # PLAINTEXT://kafka:9092 - For containers in same network
+      # PLAINTEXT_HOST://localhost:9092 - For host machine access
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9092
+      
+      # Security protocol mapping
+      # Why: Maps listener names to security protocols
+      # PLAINTEXT: No encryption (for local dev)
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      
+      # Inter-broker listener
+      # Why: How brokers communicate with each other
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      
+      # Replication factor for offsets topic
+      # Why: How many copies of offsets topic
+      # Single broker: 1, Multiple brokers: 3
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      
+      # Auto-create topics
+      # Why: Automatically create topics when first used
+      # Development: true, Production: false (create manually)
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+    networks:
+      - sdi-network
+
+  # Redis - In-memory cache
+  # Why: Fast caching for SDI detection results
+  # What: Stores frequently accessed data in memory
+  # When needed: High-traffic applications, performance optimization
+  redis:
+    image: redis:7-alpine  # Alpine = smaller image size
+    ports:
+      - "6379:6379"  # Redis default port
+    networks:
+      - sdi-network
+    # No volumes needed - Redis is in-memory only
+
+  # PostgreSQL - Relational database
+  # Why: Store metrics, audit logs, historical data
+  # What: Persistent storage for SDI data
+  # When needed: Production deployments, metrics storage
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      # Database name
+      # Why: Creates database with this name on startup
+      POSTGRES_DB: sdi
+      
+      # Database user
+      # Why: Username for database connections
+      # How to choose: Use descriptive name, avoid 'postgres' user
+      POSTGRES_USER: sdi
+      
+      # Database password
+      # Why: Password for database authentication
+      # Security: Use strong password in production!
+      # How to generate: openssl rand -base64 32
+      POSTGRES_PASSWORD: sdi123  # Change this in production!
+    ports:
+      - "5432:5432"  # PostgreSQL default port
+    volumes:
+      # Persistent storage
+      # Why: Data survives container restarts
+      # What: Stores database files
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - sdi-network
+
+  # SDI Application
+  # Why: Your main application container
+  # What: Runs SDI Spring Boot application
+  sdi-app:
+    build: .  # Build from Dockerfile in current directory
+    ports:
+      - "8080:8080"  # Map host port 8080 to container port 8080
+    environment:
+      # SDI Configuration
+      - SDI_ENABLED=true
+      - SDI_DETECTION_THRESHOLD=0.8
+      
+      # Kafka Configuration
+      - SDI_KAFKA_ENABLED=true
+      # Use service name, not localhost (containers communicate by name)
+      - SDI_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Database Configuration
+      # Why: Connect SDI to PostgreSQL for metrics storage
+      # Format: jdbc:postgresql://host:port/database
+      # Docker: Use service name (postgres:5432)
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sdi
+      - SPRING_DATASOURCE_USERNAME=sdi
+      - SPRING_DATASOURCE_PASSWORD=sdi123  # Must match POSTGRES_PASSWORD
+    depends_on:
+      # Start order: Wait for these services before starting SDI
+      - kafka      # Kafka must be ready
+      - redis      # Redis must be ready
+      - postgres   # PostgreSQL must be ready
+    networks:
+      - sdi-network  # Connect to shared network
+
+# Volumes - Persistent storage
+# Why: Data survives container deletion
+# What: Named volumes for data persistence
+volumes:
+  postgres-data:  # PostgreSQL database files
+    # No driver specified = uses default (local)
+
+# Networks - Container networking
+# Why: Allows containers to communicate by name
+# What: Creates isolated network for containers
+networks:
+  sdi-network:
+    driver: bridge  # Bridge network (default, containers can communicate)
+```
+
+### Start Complete Stack
+
+**Why use these commands:**
+- **`up -d`**: Starts containers in detached mode (background)
+- **`ps`**: Shows running containers and their status
+- **`logs -f`**: Follows logs in real-time (like `tail -f`)
+- **`down`**: Stops and removes containers
+
+```bash
+# Start everything
+# -d flag: Run in background (detached mode)
+# Why: Keeps terminal free for other commands
+docker-compose -f docker-compose-full.yml up -d
+
+# What happens:
+# 1. Creates network for containers to communicate
+# 2. Starts Zookeeper (Kafka dependency)
+# 3. Starts Kafka (waits for Zookeeper)
+# 4. Starts Redis
+# 5. Starts PostgreSQL
+# 6. Starts SDI app (waits for dependencies)
+# Takes 1-2 minutes first time
+
+# Check status of all services
+# Why: Verify all containers are running
+docker-compose -f docker-compose-full.yml ps
+
+# Expected output shows all services as "Up"
+
+# View logs for SDI app
+# -f flag: Follow logs (like tail -f)
+# Why: See what SDI is doing in real-time
+docker-compose -f docker-compose-full.yml logs -f sdi-app
+
+# View logs for all services
+docker-compose -f docker-compose-full.yml logs -f
+
+# View logs for specific service
+docker-compose -f docker-compose-full.yml logs -f kafka
+
+# Stop everything
+# Why: Clean shutdown, removes containers
+docker-compose -f docker-compose-full.yml down
+
+# Stop and remove volumes (clean slate)
+# Why: Removes all data (PostgreSQL data, etc.)
+# Warning: This deletes all data!
+docker-compose -f docker-compose-full.yml down -v
+```
+
+### Verify All Services
+
+**Why verify services:**
+- **Confirm everything works**: Ensures all services are running correctly
+- **Debug issues**: Identify which service has problems
+- **Test connectivity**: Verify services can communicate
+
+```bash
+# Check SDI health
+# Why: Verifies SDI is running and responding
+# Expected: JSON response with status "UP"
+curl http://localhost:8080/api/sdi/health
+
+# Check Kafka
+# Why: Verifies Kafka is running and accessible
+# What: Lists all Kafka topics
+# Expected: Should show topics like sdi-anomalies, sdi-mutations
+docker exec -it kafka kafka-topics --list --bootstrap-server localhost:9092
+
+# Create a test topic (if needed)
+docker exec -it kafka kafka-topics --create \
+  --topic test-topic \
+  --bootstrap-server localhost:9092 \
+  --partitions 1 \
+  --replication-factor 1
+
+# Check Redis
+# Why: Verifies Redis is running and responding
+# Expected: "PONG" response
+docker exec -it redis redis-cli ping
+
+# Test Redis set/get
+docker exec -it redis redis-cli set test-key "test-value"
+docker exec -it redis redis-cli get test-key
+
+# Check PostgreSQL
+# Why: Verifies PostgreSQL is running and accessible
+# Expected: Should return "1" (query result)
+docker exec -it postgres psql -U sdi -d sdi -c "SELECT 1;"
+
+# List all databases
+docker exec -it postgres psql -U sdi -c "\l"
+
+# Check connection count
+docker exec -it postgres psql -U sdi -d sdi -c "SELECT count(*) FROM pg_stat_activity;"
+```
+
+---
+
+## Troubleshooting
+
+### Docker Issues
+
+**Problem: Port already in use**
+```bash
+# Find process using port
+lsof -i :8080
+# Kill process
+kill -9 <PID>
+```
+
+**Problem: Docker daemon not running**
+```bash
+# macOS/Linux
+sudo systemctl start docker
+# Or restart Docker Desktop
+```
+
+### Kafka Issues
+
+**Problem: Kafka not starting**
+```bash
+# Check Zookeeper is running first
+docker ps | grep zookeeper
+
+# Check Kafka logs
+docker logs kafka
+```
+
+**Problem: Can't connect to Kafka**
+```bash
+# Verify Kafka is accessible
+docker exec -it kafka kafka-broker-api-versions --bootstrap-server localhost:9092
+```
+
+### Kubernetes Issues
+
+**Problem: Pods not starting**
+```bash
+# Check pod status
+kubectl describe pod <pod-name> -n sdi
+
+# Check events
+kubectl get events -n sdi
+```
+
+**Problem: Image pull errors**
+```bash
+# Make sure you're using Minikube's Docker
+eval $(minikube docker-env)
+docker build -t sdi:latest .
+```
+
+---
+
+## Quick Reference Commands
+
+### Docker
+```bash
+docker build -t sdi:latest .
+docker run -p 8080:8080 sdi:latest
+docker-compose up -d
+docker-compose logs -f
+docker-compose down
+```
+
+### Kafka
+```bash
+# List topics
+docker exec kafka kafka-topics --list --bootstrap-server localhost:9092
+
+# Create topic
+docker exec kafka kafka-topics --create --topic sdi-anomalies --bootstrap-server localhost:9092
+
+# Produce message
+docker exec -it kafka kafka-console-producer --broker-list localhost:9092 --topic sdi-anomalies
+
+# Consume messages
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic sdi-anomalies --from-beginning
+```
+
+### Kubernetes
+```bash
+kubectl apply -f k8s/
+kubectl get pods -n sdi
+kubectl logs -f deployment/sdi-app -n sdi
+kubectl port-forward service/sdi-service 8080:80 -n sdi
+kubectl delete -f k8s/
+```
+
+---
+
+## Next Steps
+
+- Configure [SDI Settings](/getting-started#step-5-configure-application-properties)
+- Learn about [Architecture](/architecture)
+- Check [Code Samples](/code-samples)
+

@@ -1,0 +1,151 @@
+# Methodology & Math
+
+## Bio-Inspired Approach
+
+SDI is inspired by the human immune system's adaptive response mechanism. The system follows a five-stage process:
+
+1. **Detection** -> **Isolation** -> **Extraction** -> **Synthesis** -> **Propagation**
+
+## Mathematical Foundations
+
+### Anomaly Detection
+
+SDI uses a **Gaussian Mixture Model (GMM)** for probabilistic anomaly detection:
+
+**Probabilistic Model:**
+- Each request x is converted to a 10-dimensional feature vector R
+- The GMM models normal traffic as a mixture of 5 Gaussian distributions
+- Probability P(R | GMM) is computed for each request
+- If P(R | GMM) < ε (threshold), the request is flagged as anomalous
+
+**Anomaly Score:**
+- Score = 1 - P(R | GMM)
+- Higher scores indicate higher anomaly probability
+- Threshold ε (epsilon) is configurable (default: 0.01)
+
+**Why GMM:**
+- Unsupervised learning (no labeled attack data needed)
+- Handles multiple normal traffic patterns
+- Provides probabilistic confidence scores
+- Fast real-time evaluation (O(1) complexity)
+
+**Learn More:** See the [AI-Powered Detection Engine](/ai-engine) page for detailed explanation of the GMM implementation.
+
+### Genetic Algorithm
+
+The genetic extractor uses a genetic algorithm to evolve attack signatures:
+
+**Fitness Function:**
+- F(s) = α × P(s) + β × R(s) - γ × C(s)
+- P(s) is precision of signature s
+- R(s) is recall of signature s
+- C(s) is complexity cost
+- α (alpha), β (beta), γ (gamma) are weighting factors
+
+**Selection Probability:**
+- Based on fitness scores
+- Higher fitness signatures are more likely to be selected
+- Ensures evolution toward better solutions
+
+### Mutation Synthesis
+
+The mutation synthesizer generates code mutations with diversity:
+
+**Diversity Formula:**
+- Calculates average distance between mutation pairs
+- Ensures mutations are sufficiently different
+- Maintains high diversity for effective defense
+
+Where:
+- D(M) is the diversity of mutation set M
+- d(m_i, m_j) is the distance between mutations
+- |M| is the size of the mutation set
+
+## Pipeline Overview
+
+The SDI pipeline processes requests through multiple stages:
+
+### Stage 1: Detection
+
+```python
+def detect_anomaly(request):
+    features = extract_features(request)
+    score = compute_anomaly_score(features)
+    return score > threshold
+```
+
+### Stage 2: Isolation
+
+Suspicious requests are routed to honeypots:
+
+```python
+if detect_anomaly(request):
+    route_to_honeypot(request)
+else:
+    process_normally(request)
+```
+
+### Stage 3: Extraction
+
+Genetic algorithms extract attack signatures:
+
+```python
+def extract_signature(captured_threats):
+    population = initialize_population()
+    for generation in range(max_generations):
+        fitness = evaluate_fitness(population)
+        population = select_and_evolve(population, fitness)
+    return best_signature(population)
+```
+
+### Stage 4: Synthesis
+
+Mutations are synthesized to create defenses:
+
+```python
+def synthesize_mutation(signature):
+    mutation = generate_base_mutation(signature)
+    mutation = optimize_diversity(mutation)
+    return mutation
+```
+
+### Stage 5: Propagation
+
+Mutations are deployed across services:
+
+```python
+def propagate_immunization(mutation):
+    for service in microservices:
+        deploy_mutation(service, mutation)
+```
+
+## Performance Metrics
+
+### Detection Accuracy
+
+**Formula:**
+- Accuracy = (TP + TN) / (TP + TN + FP + FN)
+- TP = True Positives
+- TN = True Negatives
+- FP = False Positives
+- FN = False Negatives
+
+### False Positive Rate
+
+**Formula:**
+- FPR = FP / (FP + TN)
+
+### Response Time
+
+The system aims for sub-100ms response time:
+
+**Components:**
+- T_response = T_detection + T_isolation + T_extraction + T_synthesis
+
+Where each component should be optimized for minimal latency.
+
+## Convergence Analysis
+
+The genetic algorithm converges when the absolute difference between consecutive fitness values is less than epsilon (ε).
+
+Where F_t is the average fitness at generation t and ε (epsilon) is the convergence threshold.

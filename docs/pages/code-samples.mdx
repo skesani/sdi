@@ -1,0 +1,297 @@
+# Code Samples
+
+## Java / Spring Boot
+
+### Add Dependency
+
+Add the dependency to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.sdi</groupId>
+  <artifactId>sdi-spring-boot-starter</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+> **Note**: Check [GitHub tags](https://github.com/skesani/sdi/tags) for the latest version.
+
+### Basic Integration
+
+```java
+package com.example.myapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringBootApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+SDI auto-configures itself when you add the dependency. No additional code needed!
+
+### Custom Configuration
+
+```java
+package com.example.myapp.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@Configuration
+@ConfigurationProperties(prefix = "sdi")
+public class SdiConfig {
+    private Detection detection = new Detection();
+    private Honeypot honeypot = new Honeypot();
+    
+    // Getters and setters
+    public static class Detection {
+        private double threshold = 0.8;
+        // ...
+    }
+    
+    public static class Honeypot {
+        private boolean enabled = true;
+        // ...
+    }
+}
+```
+
+### Application Properties
+
+```yaml
+sdi:
+  enabled: true
+  detection:
+    threshold: 0.8
+  honeypot:
+    enabled: true
+  kafka:
+    enabled: true
+    bootstrap-servers: localhost:9092
+```
+
+### Using SDI Components Directly
+
+```java
+package com.example.myapp.service;
+
+import com.sdi.detector.AnomalyDetector;
+import com.sdi.pre.PolymorphicResponseEngine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyService {
+    
+    @Autowired
+    private AnomalyDetector detector;
+    
+    @Autowired
+    private PolymorphicResponseEngine pre;
+    
+    public void processRequest(HttpServletRequest request) {
+        if (detector.isAnomalous(request)) {
+            // Handle anomaly
+            pre.handleAnomaly(request);
+        } else {
+            // Process normally
+        }
+    }
+}
+```
+
+## Python
+
+### Basic Client Usage
+
+```python
+from sdi import SDIClient
+import requests
+
+# Initialize client
+client = SDIClient(
+    api_url="http://localhost:8080/api/sdi",
+    api_key="your-api-key"  # Optional
+)
+
+# Analyze a request
+request_data = {
+    "method": "POST",
+    "path": "/api/users",
+    "headers": {"Content-Type": "application/json"},
+    "body": '{"username": "test"}'
+}
+
+response = client.analyze(request_data)
+print(f"Anomaly Score: {response['score']}")
+print(f"Is Anomalous: {response['is_anomalous']}")
+```
+
+### Flask Integration
+
+```python
+from flask import Flask, request, jsonify
+from sdi import SDIClient
+
+app = Flask(__name__)
+sdi_client = SDIClient(api_url="http://localhost:8080/api/sdi")
+
+@app.before_request
+def check_anomaly():
+    request_data = {
+        "method": request.method,
+        "path": request.path,
+        "headers": dict(request.headers),
+        "body": request.get_data(as_text=True)
+    }
+    
+    result = sdi_client.analyze(request_data)
+    if result['is_anomalous']:
+        return jsonify({"error": "Request flagged as anomalous"}), 403
+
+@app.route('/api/users', methods=['POST'])
+def create_user():
+    # Your business logic here
+    return jsonify({"status": "success"})
+```
+
+## Node.js
+
+### Basic Client Usage
+
+```javascript
+const { SDIClient } = require('sdi-nodejs');
+
+const client = new SDIClient({
+  apiUrl: 'http://localhost:8080/api/sdi',
+  apiKey: 'your-api-key' // Optional
+});
+
+// Analyze a request
+const requestData = {
+  method: 'POST',
+  path: '/api/users',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ username: 'test' })
+};
+
+client.analyze(requestData)
+  .then(response => {
+    console.log('Anomaly Score:', response.score);
+    console.log('Is Anomalous:', response.isAnomalous);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+```
+
+### Express Middleware
+
+```javascript
+const express = require('express');
+const { SDIClient } = require('sdi-nodejs');
+
+const app = express();
+const sdiClient = new SDIClient({
+  apiUrl: 'http://localhost:8080/api/sdi'
+});
+
+// Middleware to check for anomalies
+app.use(async (req, res, next) => {
+  const requestData = {
+    method: req.method,
+    path: req.path,
+    headers: req.headers,
+    body: JSON.stringify(req.body)
+  };
+  
+  try {
+    const result = await sdiClient.analyze(requestData);
+    if (result.isAnomalous) {
+      return res.status(403).json({ error: 'Request flagged as anomalous' });
+    }
+    next();
+  } catch (error) {
+    console.error('SDI Error:', error);
+    next(); // Continue on error
+  }
+});
+
+app.post('/api/users', (req, res) => {
+  // Your business logic here
+  res.json({ status: 'success' });
+});
+```
+
+## REST API Examples
+
+### Analyze Request
+
+```bash
+curl -X POST http://localhost:8080/api/sdi/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "method": "POST",
+    "path": "/api/users",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "{\"username\": \"test\"}"
+  }'
+```
+
+### Response
+
+```json
+{
+  "score": 0.85,
+  "is_anomalous": true,
+  "features": {
+    "request_size": 1024,
+    "header_count": 5,
+    "path_complexity": 0.3
+  },
+  "recommendations": [
+    "Route to honeypot",
+    "Extract signature"
+  ]
+}
+```
+
+## Kubernetes Sidecar
+
+### Deployment YAML
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: app
+        image: my-app:latest
+        ports:
+        - containerPort: 8080
+      - name: sdi-sidecar
+        image: sdi-sidecar:latest
+        env:
+        - name: SDI_API_URL
+          value: "http://sdi-core:8080/api/sdi"
+        - name: SDI_ENABLED
+          value: "true"
+```
+

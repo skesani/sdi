@@ -1,0 +1,41 @@
+{
+  "name": "sdi-nodejs",
+  "version": "1.0.0",
+  "description": "Synthetic Digital Immunity SDK for Node.js - AI-powered cybersecurity for microservices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"No build step required\" && exit 0"
+  },
+  "keywords": [
+    "sdi",
+    "cybersecurity",
+    "anomaly-detection",
+    "microservices",
+    "security",
+    "threat-detection",
+    "ai",
+    "machine-learning"
+  ],
+  "author": "SDI Team",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skesani/sdi.git",
+    "directory": "sdk/nodejs"
+  },
+  "bugs": {
+    "url": "https://github.com/skesani/sdi/issues"
+  },
+  "homepage": "https://github.com/skesani/sdi#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ]
+}
